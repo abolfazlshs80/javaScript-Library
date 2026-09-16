@@ -1,0 +1,2593 @@
+# 22. منابع معتبر
+
+در پایان محتوا، بخشی با عنوان **منابع معتبر** ایجاد کن.
+
+از منابع رسمی و معتبر استفاده کن، مانند:
+
+* MDN Web Docs
+* ECMAScript Language Specification (ECMA-262)
+* مستندات رسمی JavaScript در صورت نیاز
+
+برای هر منبع:
+
+* عنوان صفحه
+* نام وب‌سایت
+* لینک مستقیم و معتبر
+* توضیح کوتاه دربارهٔ اینکه کدام بخش از آموزش بر اساس آن منبع تهیه شده است
+
+**از لینک‌های ساختگی، لینک‌های نامعتبر یا لینک‌های کلی بدون ارتباط مستقیم با موضوع استفاده نکن.**
+
+منابع پیشنهادی اولیه:
+
+* [MDN — let](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let)
+* [MDN — const](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const)
+* [MDN — var](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var)
+* [MDN — Variables](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/Variables)
+* [MDN — Grammar and types](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types)
+* [ECMAScript Specification — Let and Const Declarations](https://tc39.es/ecma262/2026/multipage/ecmascript-language-statements-and-declarations.html)
+
+---
+
+
+* خروجی را با یک عنوان مناسب Markdown شروع کن.
+* فهرست مطالب را در ابتدای محتوا قرار بده.
+* برای فهرست مطالب، لینک‌های داخلی معتبر Markdown ایجاد کن.
+* عنوان‌ها را با ساختار `#`، `##` و `###` مرتب کن.
+* از کدبلاک‌های مشخص با زبان `javascript` استفاده کن.
+* خروجی کدها را با توضیح مشخص کن.
+* جدول‌ها باید خوانا باشند و در موبایل نیز تا حد امکان قابل استفاده باشند.
+* از ایموجی فقط در صورت نیاز و به‌صورت محدود استفاده کن.
+* محتوا باید مناسب قرار گرفتن در یک فایل مانند `let-var-const.md` باشد.
+* متن را بیش‌ازحد فشرده نکن؛ خوانایی برای مبتدی اولویت دارد.
+* در عین سادگی، دقت فنی را حفظ کن.
+* هرجا بین رفتار محیط‌های مختلف تفاوت وجود دارد، آن را مشخص کن.
+* از ادعاهای نادرست مانند «`let` و `const` اصلاً Hoist نمی‌شوند» خودداری کن؛ مفهوم را دقیق توضیح بده.
+* در پایان، منابع را جداگانه و با لینک‌های معتبر فهرست کن.
+* **هیچ بخش اصلی از فهرست بالا را حذف نکن.**
+
+
+### ASSISTANT
+```markdown
+# آموزش جامع `let`، `var` و `const` در JavaScript — از مقدماتی تا پیشرفته
+
+> راهنمای کامل تعریف متغیرها در JavaScript مدرن، همراه با مثال‌های واقعی، توضیحات عمیق و تمرین‌های عملی.
+
+---
+
+## فهرست مطالب
+
+- [1. مقدمه](#1-مقدمه)
+  - [1.1 متغیر چیست؟](#11-متغیر-چیست)
+  - [1.2 چرا در JavaScript به متغیر نیاز داریم؟](#12-چرا-در-javascript-به-متغیر-نیاز-داریم)
+  - [1.3 معرفی `var`، `let` و `const`](#13-معرفی-var-let-و-const)
+  - [1.4 تاریخچهٔ کوتاه](#14-تاریخچهکوتاه)
+- [2. مفاهیم پایهٔ تعریف متغیر](#2-مفاهیم-پایه-تعریف-متغیر)
+- [3. آموزش `let` از مقدماتی تا پیشرفته](#3-آموزش-let-از-مقدماتی-تا-پیشرفته)
+- [4. آموزش `const` از مقدماتی تا پیشرفته](#4-آموزش-const-از-مقدماتی-تا-پیشرفته)
+- [5. آموزش `var` از مقدماتی تا پیشرفته](#5-آموزش-var-از-مقدماتی-تا-پیشرفته)
+- [6. Scope در JavaScript](#6-scope-در-javascript)
+- [7. Hoisting](#7-hoisting)
+- [8. Temporal Dead Zone (TDZ)](#8-temporal-dead-zone-tdz)
+- [9. مقایسهٔ کامل `var`، `let` و `const`](#9-مقایسهکامل-var-let-و-const)
+- [10. تفاوت `const` با Immutable Value](#10-تفاوت-const-با-immutable-value)
+- [11. استفاده از `let` و `const` در حلقه‌ها](#11-استفاده-از-let-و-const-در-حلقهها)
+- [12. `let`، `const` و Closure](#12-let-const-و-closure)
+- [13. `let` و `const` در Destructuring](#13-let-و-const-در-destructuring)
+- [14. `let` و `const` در Modules](#14-let-و-const-در-modules)
+- [15. ارتباط با Global Object](#15-ارتباط-با-global-object)
+- [16. خطاهای رایج و دام‌های مهم](#16-خطاهای-رایج-و-دامهای-مهم)
+- [17. بهترین روش‌های استفاده در JavaScript مدرن](#17-بهترین-روشهای-استفاده-در-javascript-مدرن)
+- [18. مثال‌های عملی و پروژه‌محور](#18-مثالهای-عملی-و-پروژهمحور)
+- [19. تمرین‌ها](#19-تمرینها)
+- [20. پرسش‌های متداول (FAQ)](#20-پرسشهای-متداول-faq)
+- [21. جمع‌بندی نهایی](#21-جمع‌بندی-نهایی)
+- [22. منابع معتبر](#22-منابع-معتبر)
+
+---
+
+## 1. مقدمه
+
+### 1.1 متغیر چیست؟
+
+**متغیر (Variable)** در JavaScript یک **نام** است که برای نگهداری یک **مقدار (Value)** استفاده می‌شود.
+
+#### تشبیه ساده
+متغیر را مانند یک **جعبه برچسب‌دار** تصور کن:
+- جعبه، بخشی از حافظهٔ کامپیوتر است.
+- برچسب روی جعبه، **نام متغیر** است.
+- چیزی که داخل جعبه می‌گذاری، **مقدار متغیر** است.
+
+#### مثال ساده از نگهداری اطلاعات
+
+```javascript
+let name = "Ali";
+let age = 25;
+let score = 100;
+
+console.log(name);  // "Ali"
+console.log(age);   // 25
+console.log(score); // 100
+```
+
+**توضیح خط‌به‌خط:**
+- `let name = "Ali";` → یک جعبه به نام `name` می‌سازیم و داخل آن `"Ali"` را قرار می‌دهیم.
+- `let age = 25;` → یک جعبه به نام `age` می‌سازیم و عدد `25` را داخلش می‌گذاریم.
+- `console.log(name);` → محتوای جعبهٔ `name` را چاپ می‌کند.
+
+### 1.2 چرا در JavaScript به متغیر نیاز داریم؟
+
+چهار دلیل اصلی:
+
+1. **نگهداری داده (Data Storage):** می‌توانیم اطلاعات کاربر، نتایج محاسبات و داده‌های برنامه را در متغیرها ذخیره کنیم.
+2. **استفادهٔ مجدد (Reuse):** یک بار مقدار را ذخیره می‌کنیم و هزاران بار از آن استفاده می‌کنیم.
+3. **تغییر داده‌ها (Change):** در طول اجرای برنامه می‌توانیم مقادیر را تغییر دهیم.
+4. **محاسبات و منطق (Logic):** متغیرها اساس شرط‌ها (`if`)، حلقه‌ها (`for`) و تمام منطق برنامه هستند.
+
+### 1.3 معرفی `var`، `let` و `const`
+
+در JavaScript سه کلمهٔ کلیدی برای ساخت متغیر وجود دارد:
+
+| کلمهٔ کلیدی | توضیح کوتاه |
+|-------------|-------------|
+| `var` | روش قدیمی تعریف متغیر (قبل از ES6). |
+| `let` | روش مدرن برای متغیرهایی که مقدارشان تغییر می‌کند. |
+| `const` | برای ثابت‌ها (مقادیری که مقدار اولیه آن‌ها دیگر تغییر نمی‌کند). |
+
+#### چرا سه روش داریم؟
+JavaScript در ابتدا فقط `var` را داشت. اما `var` مشکلاتی در مدیریت **Scope** و **Hoisting** داشت. در سال 2015، استاندارد ES6 `let` و `const` را برای حل این مشکلات معرفی کرد.
+
+### 1.4 تاریخچهٔ کوتاه
+
+- **1995–2014 (قبل از ES6):** فقط `var` وجود داشت.
+- **2015 (ES6 یا ECMAScript 2015):** `let` و `const` معرفی شدند.
+- **2015 تا امروز:** `let` و `const` به استاندارد طلایی کدنویسی مدرن JavaScript تبدیل شده‌اند.
+
+**چرا امروز بیشتر از `let` و `const` استفاده می‌شود؟**
+- **Scope بهتر:** هر دو Block-scoped هستند (در بخش Scope دقیق‌تر می‌بینیم).
+- **خطاهای کمتر:** مشکل Hoisting و TDZ باعث می‌شود خطاهای زمان اجرا زودتر کشف شوند.
+- **خوانایی بهتر:** وقتی از `const` استفاده می‌کنیم، می‌دانیم آن متغیر دیگر تغییر نخواهد کرد.
+
+---
+
+## 2. مفاهیم پایهٔ تعریف متغیر
+
+قبل از پرداختن به هر کلمهٔ کلیدی، باید چهار مفهوم پایه را بشناسیم.
+
+### 2.1 Declaration (تعریف متغیر)
+
+Declaration یعنی فقط نام متغیر را به JavaScript اعلام کنیم، **بدون مقداردهی**.
+
+```javascript
+let userName; // فقط Declaration
+```
+
+**نتیجه:** متغیر ساخته می‌شود ولی هنوز مقداری ندارد.
+
+### 2.2 Initialization (مقداردهی اولیه)
+
+Initialization یعنی **همزمان با تعریف**، به متغیر یک مقدار اولیه بدهیم.
+
+```javascript
+let userName = "Ali"; // Initialization
+```
+
+### 2.3 Assignment (انتساب)
+
+Assignment یعنی به متغیری که قبلاً تعریف شده، مقداری اختصاص دهیم.
+
+```javascript
+let userName; // Declaration
+userName = "Ali"; // Assignment
+```
+
+علامت `=` برای Assignment استفاده می‌شود.
+
+### 2.4 Reassignment (انتساب مجدد)
+
+Reassignment یعنی **مقدار متغیر را عوض کنیم** (متغیر قبلاً تعریف و مقداردهی شده).
+
+```javascript
+let age = 25;   // Initialization
+age = 30;       // Reassignment
+```
+
+### 2.5 مثال ترکیبی
+
+```javascript
+// 1. Declaration
+let score;
+console.log(score); // undefined
+
+// 2. Initialization (یا می‌توانست Assignment باشد)
+score = 10;
+console.log(score); // 10
+
+// 3. Reassignment
+score = 20;
+console.log(score); // 20
+
+// همه را با هم
+let points = 100; // Declaration + Initialization
+points = 200;     // Reassignment
+```
+
+**خروجی:**
+```
+undefined
+10
+20
+```
+
+---
+
+## 3. آموزش `let` از مقدماتی تا پیشرفته
+
+### 3.1 `let` چیست؟
+
+`let` یک کلمهٔ کلیدی برای **تعریف متغیر** در JavaScript مدرن است. متغیرهایی که با `let` تعریف می‌شوند:
+
+- **Block-scoped** هستند (فقط درون بلاکی که تعریف شده‌اند، قابل‌دسترسی‌اند).
+- مقدارشان می‌تواند **تغییر کند** (Reassignment مجاز است).
+- **نمی‌توان** در یک Scope دوباره آن‌ها را تعریف کرد (No Redeclaration).
+
+**Syntax:**
+```javascript
+let variableName = value;
+```
+
+### 3.2 تعریف `let` بدون مقدار اولیه
+
+```javascript
+let age;
+console.log(age); // undefined
+```
+
+**چرا `undefined`؟**
+در JavaScript، وقتی متغیر تعریف می‌شود ولی مقداری به آن اختصاص نمی‌دهیم، مقدار پیش‌فرض آن `undefined` (نامعین) است. این یعنی «متغیر وجود دارد، ولی هنوز چیزی داخلش نیست».
+
+### 3.3 تعریف `let` همراه با مقدار
+
+```javascript
+let age = 25;
+console.log(age); // 25
+```
+
+**خط‌به‌خط:**
+- `let` → کلمهٔ کلیدی تعریف متغیر.
+- `age` → نام متغیر.
+- `=` → عملگر انتساب.
+- `25` → مقدار اولیه.
+
+### 3.4 تغییر مقدار متغیر `let`
+
+```javascript
+let score = 10;
+console.log(score); // 10
+
+score = 20;         // Reassignment
+console.log(score); // 20
+```
+
+**خروجی:**
+```
+10
+20
+```
+
+### 3.5 تغییر نوع مقدار در `let`
+
+JavaScript یک زبان **Dynamic Typing** (تایپ پویا) است. یعنی نوع داده در متغیر ذخیره نمی‌شود، بلکه در مقدار ذخیره می‌شود.
+
+```javascript
+let value = 10;          // number
+console.log(typeof value); // "number"
+
+value = "Hello";         // string
+console.log(typeof value); // "string"
+
+value = true;            // boolean
+console.log(typeof value); // "boolean"
+```
+
+**نکته مهم:** این ویژگی JavaScript را **Weakly Typed** (تایپ ضعیف) هم می‌نامند. می‌توانیم نوع دادهٔ یک متغیر `let` را در طول برنامه تغییر دهیم.
+
+### 3.6 تعریف چند متغیر با `let`
+
+```javascript
+let x = 1, y = 2, z = 3;
+console.log(x, y, z); // 1 2 3
+
+// بدون مقدار اولیه
+let a, b, c;
+```
+
+**توصیه:** هر متغیر را در خط جداگانه تعریف کن تا کد خوانا باشد.
+
+### 3.7 قوانین نام‌گذاری متغیرها
+
+#### نام‌های معتبر
+- باید با **حرف**، `_` یا `$` شروع شود.
+- می‌تواند شامل حروف، اعداد، `_` و `$` باشد.
+- به **بزرگی و کوچکی حروف حساس است** (Case Sensitive).
+
+```javascript
+let userName;    // معتبر
+let _private;    // معتبر
+let $price;      // معتبر
+let user123;     // معتبر
+```
+
+#### نام‌های نامعتبر
+
+```javascript
+let 1user;       // خطا: نمی‌تواند با عدد شروع شود
+let user-name;   // خطا: خط تیره مجاز نیست
+let user name;   // خطا: فاصله مجاز نیست
+let let;         // خطا: استفاده از کلمهٔ کلیدی
+```
+
+#### تفاوت `userName` و `username`
+
+```javascript
+let userName = "Ali";
+let username = "Reza";
+
+console.log(userName); // "Ali"
+console.log(username); // "Reza"
+```
+
+دو متغیر کاملاً جدا هستند.
+
+### 3.8 خطاهای رایج در استفاده از `let`
+
+#### خطای 1: استفاده قبل از تعریف
+
+```javascript
+console.log(age);
+let age = 25;
+```
+**خطا:** `ReferenceError: Cannot access 'age' before initialization`
+
+#### خطای 2: تعریف مجدد در یک Scope
+
+```javascript
+let name = "Ali";
+let name = "Reza";
+```
+**خطا:** `SyntaxError: Identifier 'name' has already been declared`
+
+#### خطای 3: استفاده از نام نامعتبر
+
+```javascript
+let 1user = "Ali";
+```
+**خطا:** `SyntaxError: Invalid or unexpected token`
+
+---
+
+## 4. آموزش `const` از مقدماتی تا پیشرفته
+
+### 4.1 `const` چیست؟
+
+`const` مخفف **constant** (ثابت) است. برای تعریف متغیرهایی استفاده می‌شود که **پس از مقداردهی اولیه، نمی‌توان مقدار آن‌ها را با مقدار دیگری جایگزین کرد** (No Reassignment).
+
+**Syntax:**
+```javascript
+const variableName = value;
+```
+
+### 4.2 الزام مقداردهی اولیه
+
+```javascript
+const pi = 3.14;
+console.log(pi); // 3.14
+```
+
+#### چرا `const` بدون مقدار اولیه مجاز نیست؟
+
+```javascript
+const name; // خطا
+```
+**خطا:** `SyntaxError: Missing initializer in const declaration`
+
+**دلیل:** چون `const` نمی‌تواند Reassignment شود، اگر بدون مقدار اولیه تعریف شود، برای همیشه `undefined` باقی می‌ماند و دیگر نمی‌توان آن را تغییر داد. پس JavaScript از ابتدا این حالت را ممنوع می‌کند.
+
+### 4.3 تلاش برای تغییر مقدار `const`
+
+```javascript
+const age = 25;
+age = 30;
+```
+**خطا:** `TypeError: Assignment to constant variable.`
+
+**نوع خطا:** `TypeError` چون سعی می‌کنیم به یک متغیر که ثابت است، مقدار جدیدی اختصاص دهیم.
+
+### 4.4 آیا `const` واقعاً ثابت است؟
+
+**این مهم‌ترین نکتهٔ `const` است:**
+
+> `const` به معنای **ثابت بودن مقدار** نیست؛ بلکه به معنای **ثابت بودن Binding** (ارتباط بین نام متغیر و مقدار) است.
+
+یعنی:
+- نمی‌توانیم متغیر `const` را به **مقدار جدید** متصل کنیم (No Reassignment).
+- اما اگر مقدار یک **Object** یا **Array** باشد، محتوای آن **می‌تواند تغییر کند** (Mutation مجاز است).
+
+### 4.5 تفاوت Reassignment و Mutation
+
+#### Reassignment (ممنوع در `const`)
+جایگزین کردن کل مقدار با یک مقدار جدید:
+
+```javascript
+const name = "Ali";
+name = "Reza"; // ممنوع - Reassignment
+```
+
+#### Mutation (مجاز در `const`)
+تغییر بخشی از محتوا بدون عوض کردن کل مقدار:
+
+```javascript
+const user = { name: "Ali" };
+user.name = "Reza"; // مجاز - Mutation
+```
+
+### 4.6 `const` و Primitive Values
+
+مقادیر اولیه (Primitive) شامل Number, String, Boolean, null, undefined, Symbol و BigInt هستند. در این حالت‌ها، `const` واقعاً ثابت است.
+
+```javascript
+const age = 25;
+const name = "Ali";
+const isActive = true;
+const empty = null;
+const nothing = undefined;
+
+// هیچ‌کدام قابل تغییر نیستند
+// age = 30;        // TypeError
+// name = "Reza";   // TypeError
+```
+
+### 4.7 `const` و Object
+
+```javascript
+const user = {
+  name: "Ali",
+  age: 25
+};
+
+// مجاز - تغییر Property
+user.name = "Reza";
+user.age = 30;
+console.log(user); // { name: "Reza", age: 30 }
+
+// غیرمجاز - Reassignment کامل
+// user = { name: "Sara", age: 20 }; // TypeError
+```
+
+**چرا Property قابل تغییر است؟**
+چون `const` فقط Reference (اشاره‌گر) به Object را ثابت نگه می‌دارد، نه محتوای داخل Object را.
+
+**چرا Reassignment غیرمجاز است؟**
+چون با Reassignment، متغیر به Object جدیدی اشاره می‌کند و این خلاف ماهیت `const` است.
+
+### 4.8 `const` و Array
+
+```javascript
+const numbers = [1, 2, 3];
+
+// مجاز - تغییر محتوا
+numbers.push(4);
+numbers[0] = 10;
+console.log(numbers); // [10, 2, 3, 4]
+
+// غیرمجاز - Reassignment
+// numbers = [5, 6, 7]; // TypeError
+```
+
+**چرا `push` مجاز است؟**
+چون `push` محتوای Array را تغییر می‌دهد (Mutation)، اما Reference به همان Array قبلی باقی می‌ماند.
+
+**چرا Reassignment غیرمجاز است؟**
+چون `numbers = [5, 6, 7]` یک Array جدید می‌سازد و متغیر را به آن متصل می‌کند.
+
+### 4.9 آیا می‌توان Object یا Array را واقعاً Immutable کرد؟
+
+**Immutability** یعنی «غیرقابل تغییر». می‌توان با `Object.freeze()` محتوای یک Object را غیرقابل تغییر کرد.
+
+```javascript
+const user = Object.freeze({
+  name: "Ali",
+  age: 25
+});
+
+// حالا تغییر Property خطا می‌دهد (در Strict Mode)
+user.name = "Reza";
+console.log(user.name); // "Ali" (تغییر نکرد)
+```
+
+#### محدودیت‌های `Object.freeze()`
+
+`Object.freeze()` فقط **Shallow Freeze** است؛ یعنی فقط Propertyهای مستقیم Object را ثابت می‌کند، نه Objectهای داخلی.
+
+```javascript
+const data = Object.freeze({
+  user: { name: "Ali" },
+  scores: [10, 20]
+});
+
+// این‌ها تغییر می‌کنند!
+data.user.name = "Reza";
+data.scores.push(30);
+
+console.log(data);
+// { user: { name: "Reza" }, scores: [10, 20, 30] }
+```
+
+برای Deep Freeze واقعی، باید هر زیرشاخه را هم freeze کرد یا از کتابخانه‌هایی مثل **Immer** استفاده کرد.
+
+### 4.10 خطاهای رایج در استفاده از `const`
+
+1. **تعریف بدون مقدار اولیه:**
+   ```javascript
+   const name; // SyntaxError
+   ```
+
+2. **Reassignment:**
+   ```javascript
+   const age = 25;
+   age = 30; // TypeError
+   ```
+
+3. **تعریف مجدد:**
+   ```javascript
+   const name = "Ali";
+   const name = "Reza"; // SyntaxError
+   ```
+
+4. **تصور اینکه Object/Array ثابت است:**
+   ```javascript
+   const user = { name: "Ali" };
+   user.name = "Reza"; // این مجاز است!
+   ```
+
+---
+
+## 5. آموزش `var` از مقدماتی تا پیشرفته
+
+### 5.1 `var` چیست؟
+
+`var` قدیمی‌ترین روش تعریف متغیر در JavaScript است. قبل از ES6، تنها راه بود.
+
+**ویژگی‌های `var`:**
+- **Function-scoped** است (نه Block-scoped).
+- **Reassignment و Redeclaration** هر دو مجاز هستند.
+- در بالای Scope خودش **Hoist** می‌شود.
+
+**Syntax:**
+```javascript
+var variableName = value;
+```
+
+### 5.2 تعریف `var` بدون مقدار اولیه
+
+```javascript
+var age;
+console.log(age); // undefined
+```
+
+مانند `let` است، مقدار پیش‌فرض `undefined` است.
+
+### 5.3 تغییر مقدار `var`
+
+```javascript
+var score = 10;
+score = 20;
+console.log(score); // 20
+```
+
+### 5.4 تعریف مجدد متغیر با `var`
+
+```javascript
+var name = "Ali";
+var name = "Reza"; // مجاز است!
+console.log(name); // "Reza"
+```
+
+**آیا مجاز است؟** بله، در `var` تعریف مجدد مجاز است.
+
+**چرا می‌تواند مشکل‌ساز باشد؟**
+- می‌تواند منجر به **بازنویسی تصادفی** متغیر شود.
+- خوانایی کد کاهش می‌یابد.
+- ممکن است خطاهای سخت‌یاب ایجاد کند.
+
+### 5.5 تفاوت `var` با `let` در تعریف مجدد
+
+```javascript
+// با var - مجاز
+var color = "red";
+var color = "blue";
+console.log(color); // "blue"
+
+// با let - خطا
+let size = 10;
+// let size = 20; // SyntaxError
+```
+
+### 5.6 `var` در JavaScript قدیمی
+
+**چرا قبلاً رایج بود؟**
+- تنها گزینهٔ موجود بود.
+- تمام کتاب‌ها و آموزش‌ها از آن استفاده می‌کردند.
+- تمام مرورگرهای قدیمی از آن پشتیبانی می‌کردند.
+
+**چه مشکلاتی باعث معرفی `let` و `const` شد؟**
+- **مشکلات Scope:** `var` فقط Function-scoped بود و در `if` و `for` Scope جدید نمی‌ساخت.
+- **مشکلات Hoisting:** `var` به بالای Scope منتقل می‌شد و می‌توانست قبل از تعریف استفاده شود.
+- **مشکلات Redeclaration:** اجازه می‌داد متغیر چندین بار در یک Scope تعریف شود.
+- **مشکلات Closure:** در حلقه‌ها، `var` باعث می‌شد همه Closureها به یک متغیر اشاره کنند.
+
+### 5.7 آیا هنوز باید از `var` استفاده کنیم؟
+
+**پاسخ کوتاه:** خیر، در کد مدرن نباید از `var` استفاده کرد.
+
+**توضیح خنثی و فنی:**
+`var` هنوز در JavaScript کار می‌کند و برای سازگاری با کد قدیمی (Backward Compatibility) حفظ شده است.
+
+**شرایطی که ممکن است با آن مواجه شویم:**
+- کار با پروژه‌های قدیمی.
+- خواندن کدهای نوشته‌شده قبل از 2015.
+- بعضی کتابخانه‌های قدیمی.
+
+**توصیه برای کد مدرن:**
+همیشه از `let` و `const` استفاده کن. اگر نیاز به Reassignment داری، `let`؛ اگر نداری، `const`.
+
+---
+
+## 6. Scope در JavaScript
+
+### 6.1 Scope چیست؟
+
+**Scope** به معنای **محدودهٔ دسترسی** به یک متغیر است. یعنی این متغیر کجا قابل‌دسترسی و استفاده است.
+
+**چرا مهم است؟**
+- مدیریت حافظه.
+- جلوگیری از تداخل نام‌ها.
+- ایجاد Encapsulation (محصورسازی).
+- افزایش امنیت و قابلیت اطمینان کد.
+
+### 6.2 Global Scope
+
+متغیری که **بیرون از هر تابع یا بلاک** تعریف شود، **Global** است و همه‌جا قابل‌دسترسی است.
+
+```javascript
+let globalVar = "I am global";
+
+function test() {
+  console.log(globalVar); // "I am global"
+}
+
+test();
+console.log(globalVar); // "I am global"
+```
+
+### 6.3 Function Scope
+
+متغیری که **درون یک تابع** تعریف شود، فقط داخل همان تابع قابل‌دسترسی است.
+
+```javascript
+function greet() {
+  let message = "Hello";
+  console.log(message); // "Hello"
+}
+
+greet();
+// console.log(message); // ReferenceError
+```
+
+### 6.4 Block Scope
+
+**Block** (بلاک) هر قسمتی از کد است که درون `{}` قرار دارد؛ مثل بدنهٔ `if`، `for`، `while` یا هر `{}` معمولی.
+
+```javascript
+if (true) {
+  // این یک Block است
+  let x = 10;
+}
+```
+
+### 6.5 Scope در `let`
+
+`let` **Block-scoped** است.
+
+```javascript
+{
+  let message = "Hello";
+  console.log(message); // "Hello"
+}
+
+// console.log(message); // ReferenceError: message is not defined
+```
+
+### 6.6 Scope در `const`
+
+`const` هم مانند `let` **Block-scoped** است.
+
+```javascript
+{
+  const pi = 3.14;
+  console.log(pi); // 3.14
+}
+
+// console.log(pi); // ReferenceError
+```
+
+### 6.7 Scope در `var`
+
+`var` **Function-scoped** است، نه Block-scoped.
+
+```javascript
+{
+  var message = "Hello";
+}
+
+console.log(message); // "Hello" - بیرون از Block قابل دسترسی است!
+```
+
+**اما در تابع:**
+
+```javascript
+function test() {
+  var message = "Hello";
+}
+
+test();
+// console.log(message); // ReferenceError
+```
+
+### 6.8 تفاوت Function Scope و Block Scope
+
+| ویژگی | Function Scope | Block Scope |
+|-------|----------------|-------------|
+| تعریف | فقط در تابع محدود است | در هر بلاک `{}` محدود است |
+| کلمه‌های کلیدی | `var` | `let` و `const` |
+| در `if` | محدود نمی‌شود | محدود می‌شود |
+| در `for` | محدود نمی‌شود | محدود می‌شود |
+
+### 6.9 Scope در شرط‌ها
+
+```javascript
+if (true) {
+  let x = 1;
+  const y = 2;
+  var z = 3;
+}
+
+// console.log(x); // ReferenceError
+// console.log(y); // ReferenceError
+console.log(z); // 3 - var بیرون از Block قابل دسترسی است
+```
+
+### 6.10 Scope در حلقه‌ها
+
+#### `for` Loop
+
+```javascript
+for (let i = 0; i < 3; i++) {
+  console.log(i); // 0, 1, 2
+}
+// console.log(i); // ReferenceError
+
+for (var j = 0; j < 3; j++) {
+  console.log(j);
+}
+console.log(j); // 3 - var بیرون از حلقه قابل دسترسی است!
+```
+
+#### `while` Loop
+
+```javascript
+while (false) {
+  let x = 10;
+}
+// console.log(x); // ReferenceError
+```
+
+### 6.11 Scope در توابع تو‌در‌تو
+
+```javascript
+function outer() {
+  let a = 1;
+
+  function inner() {
+    let b = 2;
+    console.log(a); // 1 - به Scope بیرونی دسترسی دارد
+    console.log(b); // 2
+  }
+
+  inner();
+  // console.log(b); // ReferenceError
+}
+
+outer();
+```
+
+### 6.12 Scope Chain
+
+**Scope Chain** یعنی متغیر ابتدا در Scope فعلی جست‌وجو می‌شود. اگر پیدا نشد، به Scope بیرونی می‌رود، سپس Scope بیرونی‌تر، تا Global.
+
+```javascript
+let global = "G";
+
+function outer() {
+  let outerVar = "O";
+
+  function inner() {
+    let innerVar = "I";
+    console.log(innerVar); // I - در Scope فعلی
+    console.log(outerVar); // O - در Scope بیرونی
+    console.log(global);   // G - در Global Scope
+  }
+
+  inner();
+}
+
+outer();
+```
+
+### 6.13 Shadowing
+
+**Shadowing** یعنی تعریف متغیری با همان نام در یک Scope داخلی. متغیر داخلی، متغیر بیرونی را **پنهان** می‌کند.
+
+#### مثال با `let`
+
+```javascript
+let x = 10;
+
+{
+  let x = 20;
+  console.log(x); // 20 - متغیر داخلی سایه انداخته
+}
+
+console.log(x); // 10 - متغیر بیرونی دست‌نخورده
+```
+
+#### مثال با `const`
+
+```javascript
+const y = 100;
+
+{
+  const y = 200;
+  console.log(y); // 200
+}
+
+console.log(y); // 100
+```
+
+#### مثال با `var`
+
+```javascript
+var z = 10;
+
+{
+  var z = 20;
+  console.log(z); // 20
+}
+
+console.log(z); // 20 - var Scope را نمی‌شناسد!
+```
+
+#### تفاوت Shadowing و Redeclaration
+
+- **Shadowing:** تعریف متغیر در **Scope مختلف** با همان نام (مجاز در `let` و `const`).
+- **Redeclaration:** تعریف مجدد در **همان Scope** (ممنوع در `let` و `const`، مجاز در `var`).
+
+---
+
+## 7. Hoisting
+
+### 7.1 Hoisting چیست؟
+
+**Hoisting** (بالا کشیدن) یک رفتار JavaScript است که در آن **Declaration** متغیرها و توابع، قبل از اجرای کد، به بالای Scope خود منتقل می‌شوند.
+
+**نکتهٔ مهم:** JavaScript واقعاً کد را جابه‌جا نمی‌کند؛ بلکه در مرحلهٔ Compilation (کامپایل)، Declarationها را زودتر ثبت می‌کند.
+
+### 7.2 Hoisting در `var`
+
+```javascript
+console.log(name); // undefined (نه خطا!)
+var name = "Ali";
+console.log(name); // "Ali"
+```
+
+**خروجی:**
+```
+undefined
+Ali
+```
+
+**دلیل خروجی:**
+- `var name` به بالای Scope منتقل می‌شود (Declaration Hoisting).
+- اما مقداردهی (`= "Ali"`) باقی می‌ماند.
+- پس JavaScript کد را این‌طور می‌بیند:
+  ```javascript
+  var name;          // Hoisted
+  console.log(name); // undefined
+  name = "Ali";
+  ```
+
+### 7.3 Hoisting در `let`
+
+```javascript
+console.log(name);
+let name = "Ali";
+```
+
+**خطا:** `ReferenceError: Cannot access 'name' before initialization`
+
+**چرا با `var` متفاوت است؟**
+`let` هم Hoist می‌شود، اما در **Temporal Dead Zone (TDZ)** قرار دارد و تا زمان مقداردهی، قابل‌دسترسی نیست.
+
+### 7.4 Hoisting در `const`
+
+رفتار مشابه `let` دارد.
+
+```javascript
+console.log(age);
+const age = 25;
+```
+
+**خطا:** `ReferenceError: Cannot access 'age' before initialization`
+
+### 7.5 مقایسهٔ رفتار سه نوع متغیر
+
+```javascript
+// var
+console.log(a); // undefined
+var a = 1;
+
+// let
+// console.log(b); // ReferenceError
+let b = 2;
+
+// const
+// console.log(c); // ReferenceError
+const c = 3;
+```
+
+### 7.6 Hoisting و Function Scope
+
+Declarationهای `var` درون تابع به بالای همان تابع Hoist می‌شوند.
+
+```javascript
+function test() {
+  console.log(x); // undefined
+  var x = 10;
+}
+test();
+```
+
+### 7.7 Hoisting و Block Scope
+
+`let` و `const` درون Block به ابتدای همان Block Hoist می‌شوند، اما در TDZ هستند.
+
+```javascript
+{
+  // console.log(y); // ReferenceError (TDZ)
+  let y = 10;
+}
+```
+
+---
+
+## 8. Temporal Dead Zone (TDZ)
+
+### 8.1 TDZ چیست؟
+
+**TDZ (Temporal Dead Zone)** یا **منطقهٔ مرگی زمانی**، بازهٔ زمانی بین **شروع Scope** و **مقداردهی متغیر** است که در آن متغیر قابل‌دسترسی نیست.
+
+### 8.2 TDZ در `let`
+
+```javascript
+console.log(x); // TDZ - خطا
+let x = 10;     // پایان TDZ
+console.log(x); // 10 - مجاز
+```
+
+### 8.3 TDZ در `const`
+
+```javascript
+console.log(y); // TDZ - خطا
+const y = 20;   // پایان TDZ
+```
+
+### 8.4 تفاوت TDZ با Hoisting
+
+- **Hoisting:** متغیر به بالای Scope می‌رود و با `undefined` مقداردهی می‌شود (برای `var`).
+- **TDZ:** متغیر Hoist می‌شود اما مقداردهی نمی‌شود و تا زمان مقداردهی واقعی قابل‌دسترسی نیست (برای `let` و `const`).
+
+### 8.5 مثال‌های قابل‌فهم از TDZ
+
+```javascript
+// مثال 1
+{
+  // شروع TDZ برای message
+  // console.log(message); // خطا
+  let message = "Hello";
+  // پایان TDZ
+  console.log(message); // مجاز
+}
+
+// مثال 2
+let x = 10;
+function test() {
+  console.log(x); // خطا! چرا؟
+  let x = 20;
+}
+test();
+```
+
+**مثال 2 توضیح:** در تابع `test`، یک `let x` محلی تعریف شده که کل تابع را در TDZ قرار می‌دهد.
+
+### 8.6 خطای `Cannot access 'x' before initialization`
+
+این خطا نشانهٔ TDZ است. یعنی:
+- متغیر وجود دارد (Hoist شده).
+- ولی هنوز مقداردهی نشده است.
+- تلاش کردی قبل از مقداردهی از آن استفاده کنی.
+
+### 8.7 TDZ و Shadowing
+
+```javascript
+let x = 10;
+
+{
+  console.log(x); // خطا! چرا؟
+  let x = 20;
+}
+```
+
+**دلیل خطا:** درون Block، متغیر جدید `let x` تعریف شده است. این متغیر TDZ دارد. هنگام `console.log(x)`، JavaScript به دنبال `x` می‌گردد، `x` محلی را می‌یابد (که Shadowing شده)، اما چون در TDZ است، خطا می‌دهد.
+
+**راه‌حل:**
+```javascript
+let x = 10;
+
+{
+  console.log(x); // 10 - درست
+  let y = 20;     // نام متفاوت
+}
+```
+
+---
+
+## 9. مقایسهٔ کامل `var`، `let` و `const`
+
+| ویژگی                                      | var | let | const |
+| ------------------------------------------ | --- | --- | ----- |
+| نوع Scope                                  | Function | Block | Block |
+| امکان Reassignment                         | ✅ | ✅ | ❌ |
+| امکان Redeclaration                        | ✅ | ❌ | ❌ |
+| نیاز به Initialization                     | ❌ | ❌ | ✅ |
+| رفتار Hoisting                             | Hoist + undefined | Hoist + TDZ | Hoist + TDZ |
+| Temporal Dead Zone                         | ❌ | ✅ | ✅ |
+| استفاده در Block Scope                     | ❌ | ✅ | ✅ |
+| استفاده در Function Scope                  | ✅ | ✅ | ✅ |
+| ایجاد Property روی Global Object در Script | ✅ | ❌ | ❌ |
+| کاربرد رایج در کد مدرن                     | نادرت (فقط کد قدیمی) | متغیرهای قابل تغییر | ثابت‌ها و Referenceها |
+
+### توضیح ردیف‌ها با مثال
+
+**1. Scope:**
+```javascript
+// var - Function Scope
+{
+  var v = 1;
+}
+console.log(v); // 1 - بیرون از Block قابل دسترسی
+
+// let/const - Block Scope
+{
+  let l = 1;
+  const c = 1;
+}
+// console.log(l); // خطا
+// console.log(c); // خطا
+```
+
+**2. Reassignment:**
+```javascript
+var v = 1; v = 2;   // ✅
+let l = 1; l = 2;   // ✅
+const c = 1; // c = 2; // ❌
+```
+
+**3. Redeclaration:**
+```javascript
+var v = 1; var v = 2;   // ✅
+let l = 1; // let l = 2; // ❌
+const c = 1; // const c = 2; // ❌
+```
+
+**4. Initialization:**
+```javascript
+var v;           // ✅
+let l;           // ✅
+// const c;      // ❌ SyntaxError
+```
+
+**5. Hoisting:**
+```javascript
+console.log(v); // undefined (Hoist)
+var v = 1;
+
+// console.log(l); // ReferenceError (TDZ)
+let l = 1;
+
+// console.log(c); // ReferenceError (TDZ)
+const c = 1;
+```
+
+**6. TDZ:** فقط `let` و `const` دارند.
+
+**7-8. Block/Function Scope:** هر دو `let` و `const` در بلاک و تابع محدود می‌شوند.
+
+**9. Global Object:**
+```javascript
+var v = "ali";
+let l = "reza";
+
+console.log(globalThis.v); // "ali" - روی Global Object
+console.log(globalThis.l); // undefined - روی Global Object نیست
+```
+
+**10. کاربرد رایج:**
+- `var`: تقریباً منسوخ در کد مدرن.
+- `let`: شمارنده‌ها، متغیرهای قابل تغییر.
+- `const`: ثابت‌ها، توابع، آبجکت‌ها، آرایه‌ها، تنظیمات.
+
+---
+
+## 10. تفاوت `const` با Immutable Value
+
+این بخش یکی از مهم‌ترین و پراشتباه‌ترین بخش‌هاست.
+
+### 10.1 Binding چیست؟
+
+**Binding** به معنای **ارتباط** بین یک **نام متغیر** و یک **مقدار** در حافظه است.
+
+```
+نام متغیر (x) ---> مقدار (10)
+```
+
+### 10.2 Reference چیست؟
+
+**Reference** یعنی اشاره‌گر به یک مکان در حافظه. وقتی Object یا Array می‌سازیم، متغیر Reference (اشاره‌گر) به آن مکان را نگه می‌دارد.
+
+```javascript
+const user = { name: "Ali" };
+// user یک Reference به Object در حافظه است
+```
+
+### 10.3 Primitive و Reference Value
+
+| نوع | مثال | ویژگی |
+|-----|------|-------|
+| Primitive | `10, "Ali", true` | مقدار مستقیم ذخیره می‌شود |
+| Reference | `{...}, [...]` | Reference به مکان حافظه ذخیره می‌شود |
+
+### 10.4 چرا تغییر Property یک Object با `const` مجاز است؟
+
+چون:
+1. `const` فقط **Binding** (ارتباط بین نام و Reference) را ثابت نگه می‌دارد.
+2. محتوای Object در مکان حافظهٔ دیگری است.
+3. تغییر Property محتوای Object را تغییر می‌دهد، نه Reference را.
+
+### 10.5 چرا انتساب Object جدید مجاز نیست؟
+
+چون Reassignment، **Binding** را تغییر می‌دهد. `const` این اجازه را نمی‌دهد.
+
+```javascript
+const user = { name: "Ali" };
+// user = { name: "Reza" };  // ❌ Binding تغییر می‌کند
+```
+
+### 10.6 مثال مقایسه‌ای
+
+```javascript
+const user = { name: "Ali" };
+
+user.name = "Reza"; // ✅ مجاز - Mutation
+console.log(user);  // { name: "Reza" }
+
+// user = { name: "Sara" }; // ❌ غیرمجاز - Reassignment
+```
+
+### 10.7 اشتباه رایج: «const یعنی Object ثابت است»
+
+**این تصور غلط است!**
+
+✅ `const` یعنی **Reference** به Object ثابت است.
+❌ `const` یعنی **محتوای Object** ثابت است.
+
+اگر می‌خواهی Object واقعاً ثابت باشد، باید از `Object.freeze()` استفاده کنی.
+
+---
+
+## 11. استفاده از `let` و `const` در حلقه‌ها
+
+### 11.1 `let` در حلقهٔ `for`
+
+```javascript
+for (let i = 0; i < 3; i++) {
+  console.log(i); // 0, 1, 2
+}
+// console.log(i); // ReferenceError
+```
+
+`let` برای هر Iteration یک Scope جدید می‌سازد.
+
+### 11.2 `var` در حلقهٔ `for`
+
+```javascript
+for (var i = 0; i < 3; i++) {
+  console.log(i);
+}
+console.log(i); // 3 - بیرون از حلقه قابل دسترسی!
+```
+
+### 11.3 تفاوت Scope در حلقه‌ها
+
+- **`let`:** هر بار که حلقه اجرا می‌شود، متغیر جدیدی با همان نام ساخته می‌شود.
+- **`var`:** فقط یک متغیر ساخته می‌شود و همه Iterationها از آن استفاده می‌کنند.
+
+### 11.4 مشکل Closure با `var`
+
+```javascript
+for (var i = 0; i < 3; i++) {
+  setTimeout(() => {
+    console.log(i); // 3, 3, 3 - نه 0, 1, 2
+  }, 100);
+}
+```
+
+**دلیل:**
+- وقتی `setTimeout` اجرا می‌شود، حلقه تمام شده و `i = 3` است.
+- همهٔ Closureها به **همان متغیر** `i` اشاره می‌کنند.
+- پس همه `3` را چاپ می‌کنند.
+
+### 11.5 حل مشکل با `let`
+
+```javascript
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => {
+    console.log(i); // 0, 1, 2 ✅
+  }, 100);
+}
+```
+
+**دلیل حل مشکل:**
+- `let` برای هر Iteration یک متغیر جدید می‌سازد.
+- هر Closure به **متغیر خودش** اشاره می‌کند.
+- پس 0, 1, 2 چاپ می‌شوند.
+
+### 11.6 `const` در حلقه‌ها
+
+```javascript
+// ✅ مجاز در for...of
+for (const item of [1, 2, 3]) {
+  console.log(item); // 1, 2, 3
+}
+
+// ❌ خطا در for معمولی
+// for (const i = 0; i < 3; i++) {
+//   // TypeError: Assignment to constant variable
+// }
+```
+
+**چرا؟** در `for...of`، در هر Iteration یک Binding جدید ساخته می‌شود. در `for` معمولی، `i++` نیاز به Reassignment دارد.
+
+### 11.7 مثال عملی با `setTimeout`
+
+```javascript
+// با var
+console.log("با var:");
+for (var i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), i * 100);
+}
+// خروجی: 3, 3, 3
+
+// با let
+console.log("\nبا let:");
+for (let j = 0; j < 3; j++) {
+  setTimeout(() => console.log(j), j * 100);
+}
+// خروجی: 0, 1, 2
+```
+
+**خط‌به‌خط (با `var`):**
+1. `i = 0`: setTimeout با `i=0` ثبت می‌شود.
+2. `i = 1`: setTimeout با `i=1` ثبت می‌شود.
+3. `i = 2`: setTimeout با `i=2` ثبت می‌شود.
+4. حلقه تمام می‌شود و `i = 3` می‌شود.
+5. 100ms بعد، همه setTimeoutها اجرا می‌شوند.
+6. همه `i` را چاپ می‌کنند که اکنون `3` است.
+
+---
+
+## 12. `let`، `const` و Closure
+
+### 12.1 Closure چیست؟
+
+**Closure** یک تابع است که به متغیرهای Scope بیرونی خود دسترسی دارد، حتی پس از اتمام اجرای تابع بیرونی.
+
+```javascript
+function outer() {
+  let count = 0;
+  return function inner() {
+    count++;
+    return count;
+  };
+}
+
+const counter = outer();
+console.log(counter()); // 1
+console.log(counter()); // 2
+```
+
+### 12.2 رفتار `var` در Closure
+
+```javascript
+function createFunctions() {
+  var funcs = [];
+  for (var i = 0; i < 3; i++) {
+    funcs.push(function() {
+      return i;
+    });
+  }
+  return funcs;
+}
+
+const functions = createFunctions();
+console.log(functions[0]()); // 3
+console.log(functions[1]()); // 3
+console.log(functions[2]()); // 3
+```
+
+همه به یک `i` اشاره می‌کنند که در پایان `3` است.
+
+### 12.3 رفتار `let` در Closure
+
+```javascript
+function createFunctions() {
+  let funcs = [];
+  for (let i = 0; i < 3; i++) {
+    funcs.push(function() {
+      return i;
+    });
+  }
+  return funcs;
+}
+
+const functions = createFunctions();
+console.log(functions[0]()); // 0
+console.log(functions[1]()); // 1
+console.log(functions[2]()); // 2
+```
+
+هر Closure متغیر `i` خود را دارد.
+
+### 12.4 مثال مقایسه‌ای
+
+```javascript
+// var
+function withVar() {
+  var arr = [];
+  for (var i = 0; i < 3; i++) {
+    arr.push(() => i);
+  }
+  return arr;
+}
+
+// let
+function withLet() {
+  let arr = [];
+  for (let i = 0; i < 3; i++) {
+    arr.push(() => i);
+  }
+  return arr;
+}
+
+console.log(withVar().map(f => f())); // [3, 3, 3]
+console.log(withLet().map(f => f())); // [0, 1, 2]
+```
+
+### 12.5 کاربرد عملی در Event Handlerها
+
+```javascript
+// ✅ درست با let
+const buttons = document.querySelectorAll("button");
+for (let i = 0; i < buttons.length; i++) {
+  buttons[i].addEventListener("click", () => {
+    console.log("دکمه " + i + " کلیک شد");
+  });
+}
+
+// ❌ اشتباه با var
+// همه دکمه‌ها آخرین مقدار i را چاپ می‌کنند
+```
+
+---
+
+## 13. `let` و `const` در Destructuring
+
+### 13.1 Destructuring چیست؟
+
+**Destructuring** راهی برای استخراج مقادیر از Array یا Object و انتساب آن‌ها به متغیرهاست.
+
+```javascript
+const [a, b] = [1, 2];
+console.log(a, b); // 1, 2
+```
+
+### 13.2 Destructuring با `let`
+
+```javascript
+let [a, b] = [10, 20];
+console.log(a, b); // 10, 20
+
+// می‌توانیم مقادیر را تغییر دهیم
+a = 100;
+b = 200;
+```
+
+### 13.3 Destructuring با `const`
+
+```javascript
+const [x, y] = [10, 20];
+console.log(x, y); // 10, 20
+
+// x = 100; // ❌ TypeError
+```
+
+### 13.4 Destructuring Object
+
+```javascript
+const user = { name: "Ali", age: 25 };
+
+// با const
+const { name, age } = user;
+console.log(name, age); // Ali, 25
+
+// با let
+let { name: userName, age: userAge } = user;
+console.log(userName, userAge); // Ali, 25
+
+// با نام‌های جدید
+userName = "Reza"; // ✅ مجاز
+```
+
+### 13.5 تفاوت Reassignment و Destructuring
+
+```javascript
+const user = { name: "Ali" };
+const { name } = user;
+
+// این Reassignment به name است، نه user
+// name = "Reza"; // ❌ چون name با const تعریف شده
+
+// اما اگر let بود:
+let { name: userName } = user;
+userName = "Reza"; // ✅
+```
+
+### 13.6 خطاهای رایج
+
+```javascript
+// ❌ خطا: const بدون مقداردهی
+// const [a, b];
+
+// ❌ خطا: تعریف مجدد
+// const { name } = user1;
+// const { name } = user2;
+
+// ✅ درست: با let
+let { name: n1 } = user1;
+let { name: n2 } = user2;
+```
+
+---
+
+## 14. `let` و `const` در Modules
+
+### 14.1 Module Scope چیست؟
+
+در JavaScript مدرن (ES Modules)، هر فایل یک **Module** است و متغیرهای آن فقط در همان فایل قابل‌دسترسی هستند، مگر اینکه صریحاً `export` شوند.
+
+### 14.2 تفاوت Global Scope در Script و Module
+
+| ویژگی | Script (معمولی) | Module (ESM) |
+|-------|----------------|--------------|
+| `var` در بالاترین سطح | روی `globalThis` می‌رود | فقط Module-scoped است |
+| `let/const` در بالاترین سطح | فقط Script-scoped | فقط Module-scoped |
+| `this` در بالاترین سطح | Global Object | `undefined` |
+
+### 14.3 استفاده از `let` و `const` در فایل‌های Module
+
+```javascript
+// math.js
+const PI = 3.14;
+let counter = 0;
+
+function add(a, b) {
+  return a + b;
+}
+
+export { PI, counter, add };
+```
+
+### 14.4 Export و Import
+
+```javascript
+// math.js
+export const PI = 3.14;
+export let count = 0;
+
+// app.js
+import { PI, count } from "./math.js";
+
+console.log(PI); // 3.14
+console.log(count); // 0
+
+// count = 1; // ❌ نمی‌توان imported variable را تغییر داد
+```
+
+### 14.5 تفاوت Module Scope با Global Scope
+
+```javascript
+// script.js (با <script> معمولی)
+var name = "Ali";
+console.log(globalThis.name); // "Ali"
+
+// module.js (با <script type="module">)
+var name = "Ali";
+console.log(globalThis.name); // undefined - Global نیست!
+```
+
+---
+
+## 15. ارتباط با Global Object
+
+### 15.1 Global Object چیست؟
+
+Global Object یک Object خاص است که در هر محیط JavaScript وجود دارد:
+- **مرورگر:** `window` یا `globalThis`
+- **Node.js:** `global` یا `globalThis`
+- **Deno:** `globalThis`
+
+### 15.2 رفتار `var` در Script
+
+```javascript
+var name = "Ali";
+console.log(globalThis.name); // "Ali"
+console.log(window.name);     // "Ali" در مرورگر
+```
+
+`var` در بالاترین سطح Script، یک Property روی Global Object می‌سازد.
+
+### 15.3 رفتار `let` و `const` در Script
+
+```javascript
+let age = 25;
+const city = "Tehran";
+
+console.log(globalThis.age);  // undefined
+console.log(globalThis.city); // undefined
+```
+
+`let` و `const` Property روی Global Object نمی‌سازند.
+
+### 15.4 تفاوت Script و Module
+
+هم در Script و هم در Module، `let` و `const` روی Global Object نمی‌روند. فقط `var` در Script این کار را می‌کند.
+
+### 15.5 نکات مهم و محدودیت‌های محیط اجرا
+
+- در مرورگر، `window` و `globalThis` تقریباً یکی هستند.
+- در Node.js، `global` و `globalThis` هستند.
+- همیشه از `globalThis` استفاده کن تا کد Cross-platform باشد.
+- ساختن Property روی Global Object معمولاً یک Anti-pattern است.
+
+---
+
+## 16. خطاهای رایج و دام‌های مهم
+
+### 16.1 استفاده از متغیر قبل از تعریف
+
+**کد اشتباه:**
+```javascript
+console.log(age);
+let age = 25;
+```
+
+**نوع خطا:** `ReferenceError: Cannot access 'age' before initialization`
+
+**دلیل:** `let` و `const` در TDZ هستند.
+
+**نسخهٔ صحیح:**
+```javascript
+let age = 25;
+console.log(age);
+```
+
+### 16.2 تعریف مجدد `let`
+
+**کد اشتباه:**
+```javascript
+let name = "Ali";
+let name = "Reza";
+```
+
+**نوع خطا:** `SyntaxError: Identifier 'name' has already been declared`
+
+**دلیل:** `let` اجازهٔ Redeclaration در یک Scope را نمی‌دهد.
+
+**نسخهٔ صحیح:**
+```javascript
+let name = "Ali";
+name = "Reza"; // Reassignment، نه تعریف مجدد
+```
+
+### 16.3 تعریف مجدد `const`
+
+**کد اشتباه:**
+```javascript
+const age = 25;
+const age = 30;
+```
+
+**نوع خطا:** `SyntaxError: Identifier 'age' has already been declared`
+
+**نسخهٔ صحیح:**
+```javascript
+const age = 25;
+// فقط همان یک بار تعریف می‌شود
+```
+
+### 16.4 تعریف `const` بدون مقدار اولیه
+
+**کد اشتباه:**
+```javascript
+const name;
+```
+
+**نوع خطا:** `SyntaxError: Missing initializer in const declaration`
+
+**نسخهٔ صحیح:**
+```javascript
+const name = "Ali";
+```
+
+### 16.5 تغییر مقدار `const`
+
+**کد اشتباه:**
+```javascript
+const age = 25;
+age = 30;
+```
+
+**نوع خطا:** `TypeError: Assignment to constant variable.`
+
+**نسخهٔ صحیح:**
+```javascript
+// یا از let استفاده کن
+let age = 25;
+age = 30;
+
+// یا همان مقدار اولیه را نگه دار
+const age = 25;
+```
+
+### 16.6 اشتباه گرفتن Mutation با Reassignment
+
+**کد اشتباه (تصور):**
+```javascript
+const user = { name: "Ali" };
+// فکر می‌کنیم نباید user.name را تغییر دهیم
+// در حالی که این مجاز است
+```
+
+**نسخهٔ صحیح (درک درست):**
+```javascript
+const user = { name: "Ali" };
+
+// ✅ مجاز - Mutation
+user.name = "Reza";
+user.age = 25;
+
+// ❌ غیرمجاز - Reassignment
+// user = { name: "Sara" };
+```
+
+### 16.7 تصور اینکه `var` دارای Block Scope است
+
+**کد اشتباه:**
+```javascript
+if (true) {
+  var secret = "password";
+}
+console.log(secret); // "password" - فکر می‌کردیم خطا می‌دهد!
+```
+
+**نوع مشکل:** نشت متغیر به بیرون از Block.
+
+**نسخهٔ صحیح:**
+```javascript
+if (true) {
+  let secret = "password";
+}
+// console.log(secret); // ReferenceError
+```
+
+### 16.8 استفاده از `var` در حلقه‌ها و Closure
+
+**کد اشتباه:**
+```javascript
+for (var i = 0; i < 5; i++) {
+  setTimeout(() => console.log(i), 100);
+}
+// خروجی: 5, 5, 5, 5, 5
+```
+
+**نسخهٔ صحیح:**
+```javascript
+for (let i = 0; i < 5; i++) {
+  setTimeout(() => console.log(i), 100);
+}
+// خروجی: 0, 1, 2, 3, 4
+```
+
+### 16.9 استفاده از نام‌های نامعتبر
+
+**کد اشتباه:**
+```javascript
+let 1user = "Ali";
+let my-name = "Reza";
+```
+
+**نوع خطا:** `SyntaxError`
+
+**نسخهٔ صحیح:**
+```javascript
+let user1 = "Ali";
+let myName = "Reza";
+```
+
+### 16.10 تعریف متغیر بدون `let`، `const` یا `var`
+
+**کد اشتباه:**
+```javascript
+name = "Ali";
+console.log(globalThis.name); // "Ali" - یک Global Variable ساخته شد!
+```
+
+**چرا خطرناک است؟**
+- یک متغیر Global تصادفی ساخته می‌شود.
+- می‌تواند متغیرهای دیگر را بازنویسی کند.
+- در Strict Mode خطا می‌دهد.
+
+**نسخهٔ صحیح:**
+```javascript
+"use strict";
+let name = "Ali";
+
+// یا بدون Strict Mode ولی صریح
+let name = "Ali";
+```
+
+**ارتباط با Strict Mode:** در Strict Mode، این کار خطای `ReferenceError` می‌دهد و از ساخت متغیرهای Global تصادفی جلوگیری می‌کند.
+
+### 16.11 اشتباه گرفتن `undefined` با متغیر تعریف‌نشده
+
+**کد اشتباه:**
+```javascript
+let x;
+console.log(x); // undefined
+
+// فکر می‌کنیم x تعریف نشده
+if (x === undefined) {
+  console.log("x تعریف نشده");
+}
+```
+
+**نسخهٔ صحیح:**
+```javascript
+let x;
+console.log(x); // undefined - تعریف شده ولی مقدار ندارد
+
+// console.log(y); // ReferenceError - واقعاً تعریف نشده
+
+// بررسی درست
+if (typeof y === "undefined") {
+  console.log("y واقعاً تعریف نشده");
+}
+```
+
+---
+
+## 17. بهترین روش‌های استفاده در JavaScript مدرن
+
+### 17.1 چه زمانی از `const` استفاده کنیم؟
+
+- متغیرهایی که **مقدارشان عوض نمی‌شود** (اعداد ثابت، رشته‌ها).
+- **توابع** و **آرو فانکشن‌ها**.
+- **آبجکت‌ها** و **آرایه‌ها** (مگر اینکه بخواهیم کل آبجکت را جایگزین کنیم).
+- **Imports** از Moduleها.
+- مقادیر **Destructured**.
+
+```javascript
+const PI = 3.14;
+const add = (a, b) => a + b;
+const user = { name: "Ali" };
+const { name, age } = user;
+```
+
+### 17.2 چه زمانی از `let` استفاده کنیم؟
+
+- **شمارنده‌ها** در حلقه‌ها.
+- متغیرهایی که **مقدارشان تغییر می‌کند** (وضعیت، وضعیت بازی، مقدار ورودی).
+- **Accumulators** (جمع‌کننده‌ها).
+- متغیرهایی که در طول اجرای برنامه **Reassign** می‌شوند.
+
+```javascript
+let count = 0;
+count++;
+
+for (let i = 0; i < 10; i++) {
+  // ...
+}
+
+let total = 0;
+for (const num of [1, 2, 3]) {
+  total += num;
+}
+```
+
+### 17.3 چه زمانی ممکن است با `var` مواجه شویم؟
+
+- **کدهای قدیمی** (قبل از 2015).
+- **کتابخانه‌های قدیمی**.
+- **پروژه‌های Legacy**.
+
+در این حالت‌ها، فقط باید آن‌ها را بخوانیم، نه خودمان از آن‌ها استفاده کنیم.
+
+### 17.4 اصل معروف
+
+> **«Use `const` when you can, and `let` when you have to.»**
+
+**ترجمه:**
+> «هر جا می‌توانی از `const` استفاده کن، و هر جا مجبوری از `let` استفاده کن.»
+
+**چرا؟**
+- `const` به ما می‌گوید: «این متغیر تغییر نخواهد کرد». این کد را قابل‌فهم‌تر می‌کند.
+- اگر نیاز به Reassignment داشتیم، `let` را انتخاب می‌کنیم.
+- `var` تقریباً هیچ‌وقت لازم نیست.
+
+### 17.5 چرا استفاده از `const` می‌تواند خوانایی کد را افزایش دهد؟
+
+وقتی `const` را می‌بینی، می‌دانی:
+- این مقدار **در طول اجرای تابع تغییر نمی‌کند**.
+- نیاز به گشتن در کد برای پیدا کردن Reassignmentها نداری.
+- **Refactoring** راحت‌تر است.
+- **باگ‌های کمتری** به‌وجود می‌آید.
+
+### 17.6 چرا نباید صرفاً به‌دلیل امکان تغییر Object، همیشه از `let` استفاده کنیم؟
+
+اگر همیشه از `let` استفاده کنی:
+- نمی‌دانی کدام متغیر واقعاً باید ثابت بماند.
+- ممکن است تصادفاً یک متغیر را Reassign کنی.
+- کد، **منظور خود را شفاف نمی‌کند**.
+
+```javascript
+// بد
+let API_URL = "https://api.example.com";
+// ممکن است تصادفاً تغییر کند
+
+// خوب
+const API_URL = "https://api.example.com";
+// مشخص است که نباید تغییر کند
+```
+
+### 17.7 نکات مربوط به Style Guideها
+
+بیشتر Style Guideهای معروف (Airbnb, Google, StandardJS) توصیه می‌کنند:
+- از `var` استفاده نکن.
+- پیش‌فرض `const` باشد.
+- فقط وقتی `let` استفاده کن که Reassignment نیاز باشد.
+
+---
+
+## 18. مثال‌های عملی و پروژه‌محور
+
+### مثال 1: محاسبهٔ مجموع اعداد
+
+**مسئله:** تابعی بنویس که مجموع یک Array از اعداد را برگرداند.
+
+```javascript
+const numbers = [1, 2, 3, 4, 5];
+
+let total = 0;
+for (const num of numbers) {
+  total += num;
+}
+
+console.log(total); // 15
+```
+
+**تحلیل انتخاب متغیر:**
+- `numbers` با `const`: آرایه تغییر نمی‌کند (فقط خوانده می‌شود).
+- `total` با `let`: در هر Iteration تغییر می‌کند.
+- `num` با `const`: در هر Iteration Binding جدید می‌شود.
+
+**نکتهٔ آموزشی:** `const` در `for...of` کاملاً مجاز است چون Binding در هر Iteration تازه می‌شود.
+
+### مثال 2: مدیریت امتیاز یک بازی
+
+**مسئله:** سیستم امتیازدهی یک بازی ساده.
+
+```javascript
+const INITIAL_SCORE = 100;
+const MAX_SCORE = 1000;
+
+let currentScore = INITIAL_SCORE;
+
+function addScore(points) {
+  if (currentScore + points <= MAX_SCORE) {
+    currentScore += points;
+  } else {
+    currentScore = MAX_SCORE;
+  }
+  return currentScore;
+}
+
+console.log(addScore(50));  // 150
+console.log(addScore(200)); // 350
+```
+
+**تحلیل:**
+- `INITIAL_SCORE` و `MAX_SCORE` با `const`: مقادیر ثابت هستند.
+- `currentScore` با `let`: مقدار تغییر می‌کند.
+
+**نکتهٔ آموزشی:** استفاده از `const` برای ثابت‌ها، کد را خودتوضیح (Self-documenting) می‌کند.
+
+### مثال 3: پردازش آرایهٔ کاربران
+
+**مسئله:** آرایه‌ای از کاربران را فیلتر و تبدیل کن.
+
+```javascript
+const users = [
+  { name: "Ali", age: 25, active: true },
+  { name: "Reza", age: 17, active: true },
+  { name: "Sara", age: 30, active: false }
+];
+
+const activeAdults = users.filter(user => user.age >= 18 && user.active);
+
+const names = activeAdults.map(user => user.name);
+
+console.log(names); // ["Ali"]
+```
+
+**تحلیل:**
+- `users` با `const`: آرایه اصلی تغییر نمی‌کند.
+- `activeAdults` و `names` با `const`: نتایج یک‌بار محاسبه می‌شوند.
+
+**نکتهٔ آموزشی:** متدهای `filter` و `map` آرایهٔ جدید برمی‌گردانند، پس می‌توانیم نتیجه را با `const` بگیریم.
+
+### مثال 4: شمارندهٔ حلقه
+
+**مسئله:** حلقه‌ای که اعداد زوج را چاپ می‌کند.
+
+```javascript
+for (let i = 0; i < 10; i++) {
+  if (i % 2 === 0) {
+    const message = `عدد ${i} زوج است`;
+    console.log(message);
+  }
+}
+
+// console.log(i); // ReferenceError
+// console.log(message); // ReferenceError
+```
+
+**تحلیل:**
+- `i` با `let`: شمارنده است و تغییر می‌کند.
+- `message` با `const`: فقط داخل `if` استفاده می‌شود و مقدارش در همان Block ثابت است.
+
+**نکتهٔ آموزشی:** حتی در یک حلقه، متغیرهای داخلی می‌توانند `const` باشند.
+
+### مثال 5: مدیریت تنظیمات برنامه
+
+**مسئله:** تنظیمات یک برنامه را مدیریت کن.
+
+```javascript
+const CONFIG = Object.freeze({
+  apiUrl: "https://api.example.com",
+  timeout: 5000,
+  theme: "dark"
+});
+
+// CONFIG.apiUrl = "https://new.com"; // در Strict Mode خطا
+console.log(CONFIG.apiUrl); // https://api.example.com
+
+// برای تغییر، باید یک Config جدید بسازیم
+const newConfig = { ...CONFIG, theme: "light" };
+console.log(newConfig.theme); // light
+```
+
+**تحلیل:**
+- `CONFIG` با `const`: Reference ثابت است.
+- `Object.freeze()`: محتوا را هم ثابت می‌کند.
+- `newConfig` با `const`: یک آبجکت جدید ثابت است.
+
+**نکتهٔ آموزشی:** ترکیب `const` با `Object.freeze()` و Spread Operator یک الگوی خوب برای تنظیمات است.
+
+### مثال 6: تغییر Propertyهای یک Object
+
+**مسئله:** Object کاربر را به‌روزرسانی کن.
+
+```javascript
+const user = {
+  name: "Ali",
+  email: "ali@example.com",
+  settings: {
+    theme: "light",
+    notifications: true
+  }
+};
+
+// ✅ مجاز - تغییر Property
+user.email = "new@example.com";
+
+// ✅ مجاز - حتی Propertyهای داخلی
+user.settings.theme = "dark";
+
+console.log(user);
+
+// ❌ غیرمجاز - جایگزینی کامل
+// user = { name: "Reza" };
+```
+
+**تحلیل:**
+- `user` با `const`: Binding ثابت است.
+- Propertyها می‌توانند تغییر کنند (Mutation).
+- این یک الگوی بسیار رایج در React و برنامه‌های مدرن است.
+
+### مثال 7: ساخت تابعی با Closure
+
+**مسئله:** تابعی بساز که تعداد دفعات فراخوانی‌اش را بشمارد.
+
+```javascript
+function createCounter() {
+  let count = 0;
+  
+  return {
+    increment: () => ++count,
+    decrement: () => --count,
+    getCount: () => count
+  };
+}
+
+const counter = createCounter();
+console.log(counter.increment()); // 1
+console.log(counter.increment()); // 2
+console.log(counter.decrement()); // 1
+console.log(counter.getCount());  // 1
+```
+
+**تحلیل:**
+- `count` با `let`: درون Closure تغییر می‌کند.
+- `counter` با `const`: Reference به آبجکت ثابت است.
+- متدهای داخل با `const` (در Arrow Function ها): مقدارشان تغییر نمی‌کند.
+
+### مثال 8: استفاده در Event Handler
+
+**مسئله:** روی چند دکمه کلیک کن و هر کدام شمارهٔ خودشان را چاپ کنند.
+
+```javascript
+// فرض کن 5 دکمه داریم
+const buttons = document.querySelectorAll(".btn");
+
+buttons.forEach((button, index) => {
+  button.addEventListener("click", () => {
+    const message = `دکمه شماره ${index + 1} کلیک شد`;
+    console.log(message);
+  });
+});
+```
+
+**تحلیل:**
+- `buttons` با `const`: NodeList ثابت است.
+- `button` و `index` با `const`: برای هر Iteration تازه می‌شوند.
+- `message` با `const`: در هر کلیک یک Binding جدید.
+
+**نکتهٔ آموزشی:** `forEach` به‌جای `for` با `let`، الگوی مدرن‌تری است.
+
+### مثال 9: Module ساده
+
+**مسئله:** یک Module ماشین‌حساب بساز.
+
+```javascript
+// calculator.mjs
+const add = (a, b) => a + b;
+const subtract = (a, b) => a - b;
+
+let calculationCount = 0;
+
+export function calculate(operation, a, b) {
+  calculationCount++;
+  
+  if (operation === "add") return add(a, b);
+  if (operation === "subtract") return subtract(a, b);
+  return null;
+}
+
+export function getCount() {
+  return calculationCount;
+}
+```
+
+```javascript
+// app.mjs
+import { calculate, getCount } from "./calculator.mjs";
+
+console.log(calculate("add", 5, 3));     // 8
+console.log(calculate("subtract", 10, 4)); // 6
+console.log(getCount());                  // 2
+```
+
+**تحلیل:**
+- توابع با `const`: هرگز تغییر نمی‌کنند.
+- `calculationCount` با `let`: افزایش می‌یابد.
+- `getCount` فقط Read-only است.
+
+### مثال 10: مقایسهٔ کد قدیمی و مدرن
+
+**مسئله:** همان تابع را با دو روش بنویس.
+
+```javascript
+// ❌ کد قدیمی با var
+function oldWay() {
+  var result = 0;
+  for (var i = 1; i <= 5; i++) {
+    var temp = i * 2;
+    result += temp;
+  }
+  console.log(result); // 30
+  console.log(i);       // 6 - نشت کرده!
+  console.log(temp);    // 10 - نشت کرده!
+}
+
+// ✅ کد مدرن با let/const
+function modernWay() {
+  let result = 0;
+  for (let i = 1; i <= 5; i++) {
+    const temp = i * 2;
+    result += temp;
+  }
+  console.log(result); // 30
+  // console.log(i);    // ReferenceError
+  // console.log(temp); // ReferenceError
+}
+```
+
+---
+
+## 19. تمرین‌ها
+
+### سطح مقدماتی
+
+#### تمرین 1
+یک متغیر با `let` بساز و مقدارش را `"Hello"` قرار بده. سپس مقدارش را به `"World"` تغییر بده و چاپ کن.
+
+**پاسخ:**
+```javascript
+let greeting = "Hello";
+greeting = "World";
+console.log(greeting); // World
+```
+
+#### تمرین 2
+ثابتی به نام `PI` بساز و مقدار `3.14159` به آن اختصاص بده. سپس تلاش کن مقدارش را تغییر بدهی.
+
+**پاسخ:**
+```javascript
+const PI = 3.14159;
+// PI = 3.14; // ❌ TypeError
+console.log(PI); // 3.14159
+```
+
+#### تمرین 3
+کد زیر چه خطایی می‌دهد؟ چرا؟
+
+```javascript
+const name;
+name = "Ali";
+```
+
+**پاسخ:**
+خطای `SyntaxError: Missing initializer in const declaration`. چون `const` باید در همان خط مقداردهی شود.
+
+#### تمرین 4
+کد زیر چه خطایی می‌دهد؟ چرا؟
+
+```javascript
+let age = 25;
+let age = 30;
+```
+
+**پاسخ:**
+خطای `SyntaxError: Identifier 'age' has already been declared`. چون نمی‌توان `let` را در یک Scope دوباره تعریف کرد.
+
+### سطح متوسط
+
+#### تمرین 5
+خروجی کد زیر چیست؟ چرا؟
+
+```javascript
+let x = 10;
+{
+  let x = 20;
+  console.log(x);
+}
+console.log(x);
+```
+
+**پاسخ:**
+```
+20
+10
+```
+به‌دلیل Shadowing در Block Scope. `x` داخلی، `x` بیرونی را پنهان می‌کند.
+
+#### تمرین 6
+خروجی کد زیر چیست؟
+
+```javascript
+var a = 1;
+{
+  var a = 2;
+  console.log(a);
+}
+console.log(a);
+```
+
+**پاسخ:**
+```
+2
+2
+```
+`var` Block Scope ندارد، پس `a` درون Block همان `a` بیرونی است.
+
+#### تمرین 7
+آیا کد زیر درست کار می‌کند؟ چرا؟
+
+```javascript
+const user = { name: "Ali" };
+user.name = "Reza";
+user.age = 25;
+console.log(user);
+```
+
+**پاسخ:**
+بله، درست کار می‌کند.
+```
+{ name: "Reza", age: 25 }
+```
+چون Mutation در `const` مجاز است، فقط Reassignment غیرمجاز است.
+
+#### تمرین 8
+خروجی کد زیر چیست؟
+
+```javascript
+const arr = [1, 2, 3];
+arr.push(4);
+arr[0] = 10;
+console.log(arr);
+```
+
+**پاسخ:**
+```
+[10, 2, 3, 4]
+```
+`push` و تغییر Index مجاز است، فقط جایگزینی کل آرایه غیرمجاز است.
+
+### سطح پیشرفته
+
+#### تمرین 9
+خروجی کد زیر چیست؟ چرا؟
+
+```javascript
+console.log(x);
+var x = 10;
+```
+
+**پاسخ:**
+```
+undefined
+```
+به‌دلیل Hoisting در `var`. Declaration بالا می‌رود اما Initialization نمی‌رود.
+
+#### تمرین 10
+خروجی کد زیر چیست؟
+
+```javascript
+console.log(y);
+let y = 10;
+```
+
+**پاسخ:**
+```
+ReferenceError: Cannot access 'y' before initialization
+```
+به‌دلیل TDZ. `let` هم Hoist می‌شود ولی تا Initialization قابل‌دسترسی نیست.
+
+#### تمرین 11
+خروجی کد زیر چیست؟ چرا؟
+
+```javascript
+let x = 10;
+
+function test() {
+  console.log(x);
+  let x = 20;
+}
+
+test();
+```
+
+**پاسخ:**
+```
+ReferenceError: Cannot access 'x' before initialization
+```
+به‌دلیل Shadowing. در تابع `test`، متغیر محلی `let x` تعریف شده که کل تابع را در TDZ قرار می‌دهد.
+
+#### تمرین 12
+خروجی کد زیر چیست؟ چرا؟
+
+```javascript
+for (var i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 100);
+}
+```
+
+**پاسخ:**
+```
+3
+3
+3
+```
+چون `var` Scope جداگانه در هر Iteration نمی‌سازد. همه Closureها به همان `i` اشاره می‌کنند که در پایان حلقه `3` است.
+
+#### تمرین 13
+چگونه کد تمرین 12 را درست می‌کنی؟
+
+**پاسخ:**
+```javascript
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 100);
+}
+// خروجی: 0, 1, 2
+```
+`let` برای هر Iteration یک Scope جدید می‌سازد.
+
+#### تمرین 14
+خروجی کد زیر چیست؟
+
+```javascript
+// file.mjs
+var name = "Ali";
+console.log(globalThis.name);
+```
+
+**پاسخ:**
+```
+undefined
+```
+در Module، `var` روی Global Object نمی‌رود.
+
+---
+
+## 20. پرسش‌های متداول (FAQ)
+
+### 1. تفاوت اصلی `let` و `const` چیست؟
+هر دو Block-scoped هستند، اما `let` اجازهٔ Reassignment می‌دهد و `const` نمی‌دهد. همچنین `const` نیاز به Initialization در همان خط دارد.
+
+### 2. آیا `const` یعنی مقدار همیشه غیرقابل‌تغییر است؟
+خیر. `const` فقط Binding را ثابت نگه می‌دارد. اگر مقدار Object یا Array باشد، محتوای آن قابل‌تغییر است (Mutation). برای ثابت کردن کامل محتوا از `Object.freeze()` استفاده کن.
+
+### 3. آیا `let` و `const` Hoist می‌شوند؟
+بله، هر دو Hoist می‌شوند، اما در **Temporal Dead Zone (TDZ)** قرار می‌گیرند و تا Initialization قابل‌دسترسی نیستند.
+
+### 4. چرا `let` قبل از تعریف خطا می‌دهد؟
+به‌دلیل TDZ. این یک ویژگی طراحی است که از اشتباهات زمان اجرا جلوگیری می‌کند و کد را قابل‌پیش‌بینی‌تر می‌کند.
+
+### 5. آیا `var` هنوز استفاده می‌شود؟
+در کد مدرن، خیر. فقط ممکن است در پروژه‌های قدیمی یا کتابخانه‌های Legacy دیده شود. توصیه می‌شود هرگز از آن استفاده نکنی.
+
+### 6. چرا در JavaScript مدرن بیشتر از `const` استفاده می‌کنیم؟
+چون بیشتر متغیرها در طول برنامه Reassign نمی‌شوند. استفاده از `const` کد را شفاف‌تر، قابل‌پیش‌بینی‌تر و کم‌خطاتر می‌کند.
+
+### 7. آیا می‌توان مقدار `const` را تغییر داد؟
+- برای Primitive (عدد، رشته، ...): خیر.
+- برای Reference (Object, Array): محتوای داخلی می‌تواند تغییر کند (Mutation)، اما نمی‌توان کل Reference را عوض کرد.
+
+### 8. تفاوت Redeclaration و Reassignment چیست؟
+- **Redeclaration:** تعریف مجدد متغیر با همان نام در همان Scope (مانند `let x = 1; let x = 2;`).
+- **Reassignment:** تغییر مقدار متغیر قبلاً تعریف‌شده (مانند `let x = 1; x = 2;`).
+
+### 9. تفاوت Scope و Closure چیست؟
+- **Scope:** محدودهٔ دسترسی به متغیرها (Global, Function, Block).
+- **Closure:** تابعی که به متغیرهای Scope بیرونی خود دسترسی دارد، حتی پس از اتمام تابع بیرونی.
+
+### 10. چرا `var` در حلقه‌ها مشکل‌ساز می‌شود؟
+چون `var` فقط یک متغیر می‌سازد و همه Iterationها از آن استفاده می‌کنند. در Closureها، همه به همان متغیر (با آخرین مقدار) اشاره می‌کنند.
+
+### 11. آیا `let` می‌تواند نوع دادهٔ خود را تغییر دهد؟
+بله. JavaScript **Dynamically Typed** است، پس یک متغیر `let` می‌تواند در طول برنامه از `number` به `string` یا هر نوع دیگری تبدیل شود.
+
+### 12. آیا `const` برای Objectها مناسب است؟
+بله، بسیار مناسب است. در واقع، بیشتر Objectها در کد مدرن با `const` تعریف می‌شوند، چون معمولاً Reference تغییر نمی‌کند، بلکه Propertyها تغییر می‌کنند.
+
+### 13. تفاوت Script و Module در Scope چیست؟
+- **Script:** `var` در بالاترین سطح روی Global Object می‌رود.
+- **Module:** تمام متغیرها (حتی `var`) در Module Scope محدود می‌شوند و روی Global Object نمی‌روند.
+
+### 14. آیا متغیری که مقدارش `undefined` است، تعریف نشده؟
+خیر. `undefined` یعنی متغیر **تعریف شده** ولی **مقداردهی نشده**. متغیر تعریف‌نشده باعث `ReferenceError` می‌شود.
+
+### 15. آیا `const` از تغییر Propertyهای Object جلوگیری می‌کند؟
+خیر. `const` فقط Reference را ثابت نگه می‌دارد. برای جلوگیری از تغییر Propertyها از `Object.freeze()` استفاده کن.
+
+---
+
+## 21. جمع‌بندی نهایی
+
+### تعریف کوتاه هر سه کلمهٔ کلیدی
+
+| کلمه | تعریف |
+|------|-------|
+| `var` | روش قدیمی تعریف متغیر با Function Scope و Hoisting کامل. |
+| `let` | روش مدرن تعریف متغیرهای قابل تغییر با Block Scope و TDZ. |
+| `const` | روش مدرن تعریف Bindingهای ثابت با Block Scope، TDZ و نیاز به Initialization. |
+
+### مهم‌ترین تفاوت‌ها
+
+1. **Scope:** `var` Function-scoped، `let` و `const` Block-scoped.
+2. **Reassignment:** `var` و `let` مجاز، `const` غیرمجاز.
+3. **Redeclaration:** فقط `var` مجاز است.
+4. **Initialization:** فقط `const` الزامی است.
+5. **Hoisting:** `var` به `undefined` می‌رود، `let` و `const` در TDZ.
+6. **Global Object:** فقط `var` در Script روی Global Object می‌رود.
+
+### قوانین پیشنهادی برای استفاده
+
+1. همیشه با `const` شروع کن.
+2. اگر نیاز به Reassignment داشتی، `let` استفاده کن.
+3. هرگز از `var` استفاده نکن (مگر در کد Legacy که نمی‌توانی تغییر دهی).
+4. `const` به معنای Immutable نیست؛ فقط Binding ثابت است.
+5. برای Immutable کردن کامل Object از `Object.freeze()` استفاده کن.
+6. همیشه از `"use strict"` استفاده کن.
+
+### چند مثال کوتاه
+
+```javascript
+// ✅ بهترین روش
+const PI = 3.14;
+let count = 0;
+const user = { name: "Ali" };
+user.name = "Reza"; // ✅ مجاز
+
+// ❌ روش‌های بد
+var x = 1;
+const name;        // خطا
+let y = 1; let y = 2; // خطا
+```
+
+### اشتباهاتی که باید از آن‌ها دوری کرد
+
+- استفاده از `var` در کد مدرن.
+- تصور اینکه `const` مقدار را کاملاً ثابت می‌کند.
+- استفاده از متغیر قبل از تعریف آن (حتی با `let` و `const`).
+- تعریف متغیر بدون `let`, `const` یا `var`.
+- نداشتن `"use strict"` در کد.
+- انتظار خطا هنگام Mutation یک Object یا Array با `const`.
+
+### چک‌لیست سریع برای انتخاب بین `let`، `const` و `var`
+
+- [ ] آیا این مقدار **هرگز Reassign نمی‌شود**؟ → `const`
+- [ ] آیا این یک **تابع** است؟ → `const`
+- [ ] آیا این یک **Object** یا **Array** است؟ → `const`
+- [ ] آیا این **شمارندهٔ حلقه** است؟ → `let`
+- [ ] آیا این مقدار در طول اجرا **تغییر می‌کند**؟ → `let`
+- [ ] آیا در حال **نوشتن کد جدید** هستی؟ → **هرگز** `var`
+- [ ] آیا این یک **Import** است؟ → `const`
+- [ ] آیا می‌خواهی مقدار را واقعاً ثابت کنی؟ → `const` + `Object.freeze()`
+
+---
+
+## 22. منابع معتبر
+
+برای مطالعهٔ بیشتر و دقیق‌تر، از این منابع رسمی و معتبر استفاده کن:
+
+### 1. MDN Web Docs — `let`
+- **عنوان صفحه:** `let` - JavaScript | MDN
+- **نام وب‌سایت:** MDN Web Docs (Mozilla Developer Network)
+- **لینک:** https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let
+- **توضیح:** مستندات رسمی `let` شامل Syntax، مثال‌ها، رفتار Scope و TDZ. بخش‌های 3، 6 و 7 این آموزش بر اساس این منبع تهیه شده‌اند.
+
+### 2. MDN Web Docs — `const`
+- **عنوان صفحه:** `const` - JavaScript | MDN
+- **نام وب‌سایت:** MDN Web Docs
+- **لینک:** https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const
+- **توضیح:** مستندات کامل دربارهٔ `const`، تفاوت با Reassignment، رفتار با Object و Array. بخش‌های 4 و 10 این آموزش بر اساس این منبع هستند.
+
+### 3. MDN Web Docs — `var`
+- **عنوان صفحه:** `var` - JavaScript | MDN
+- **نام وب‌سایت:** MDN Web Docs
+- **لینک:** https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var
+- **توضیح:** توضیح کامل دربارهٔ رفتار قدیمی `var`، Hoisting و Scope. بخش 5 و مقایسه‌ها در بخش 9 بر اساس این منبع هستند.
+
+### 4. MDN — Variables
+- **عنوان صفحه:** Variables - MDN
+- **نام وب‌سایت:** MDN Web Docs
+- **لینک:** https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/Variables
+- **توضیح:** معرفی کلی متغیرها در JavaScript برای مبتدیان. بخش 1 و 2 این آموزش از این منبع الهام گرفته شده‌اند.
+
+### 5. MDN — Grammar and types
+- **عنوان صفحه:** Grammar and types - JavaScript | MDN
+- **نام وب‌سایت:** MDN Web Docs
+- **لینک:** https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types
+- **توضیح:** راهنمای کامل دربارهٔ انواع داده، Declarationها و قوانین نام‌گذاری. بخش‌های 3.7 و 16.9 بر اساس این منبع هستند.
+
+### 6. ECMAScript Language Specification — Let and Const Declarations
+- **عنوان صفحه:** ECMAScript® 2026 Language Specification - Let and Const Declarations
+- **نام وب‌سایت:** Ecma International (tc39.es)
+- **لینک:** https://tc39.es/ecma262/2026/multipage/ecmascript-language-statements-and-declarations.html
+- **توضیح:** استاندارد رسمی JavaScript. برای درک عمیق TDZ، Hoisting و Scope، این منبع اصلی و قطعی است. بخش‌های 7 و 8 این آموزش بر اساس مشخصات رسمی ECMA-262 تهیه شده‌اند.
+
+### 7. MDN — Closures
+- **عنوان صفحه:** Closures - JavaScript | MDN
+- **نام وب‌سایت:** MDN Web Docs
+- **لینک:** https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
+- **توضیح:** مستندات رسمی دربارهٔ Closure و ارتباط آن با Scope. بخش‌های 12 و مثال‌های Closure بر اساس این منبع هستند.
+
+### 8. MDN — Destructuring assignment
+- **عنوان صفحه:** Destructuring assignment - JavaScript | MDN
+- **نام وب‌سایت:** MDN Web Docs
+- **لینک:** https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
+- **توضیح:** راهنمای کامل دربارهٔ Destructuring در JavaScript. بخش 13 این آموزش بر اساس این منبع تهیه شده است.
+
+### 9. MDN — JavaScript modules
+- **عنوان صفحه:** JavaScript modules - MDN
+- **نام وب‌سایت:** MDN Web Docs
+- **لینک:** https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules
+- **توضیح:** معرفی کامل ES Modules و تفاوت با Script معمولی. بخش 14 و 15.4 بر اساس این منبع هستند.
+
+### 10. MDN — Object.freeze()
+- **عنوان صفحه:** `Object.freeze()` - JavaScript | MDN
+- **نام وب‌سایت:** MDN Web Docs
+- **لینک:** https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze
+- **توضیح:** مستندات رسمی دربارهٔ Immutability و `Object.freeze()`. بخش‌های 4.9 و 10 بر اساس این منبع تهیه شده‌اند.
+
+---
+
+**پایان آموزش** 🎯
+
+این آموزش کامل‌ترین منبع فارسی برای یادگیری `let`، `var` و `const` در JavaScript است. با مطالعهٔ دقیق این محتوا و انجام تمرین‌ها، به‌طور کامل بر مفهوم تعریف متغیر در JavaScript مدرن مسلط خواهی شد.
+
+اگر سؤالی داشتی یا بخشی نیاز به توضیح بیشتری داشت، می‌توانی یک Issue در ریپوزیتوری باز کنی.
+
+**موفق باشی در یادگیری JavaScript!**
+```
+
+این فایل `let-var-const.md` آمادهٔ انتشار در ریپوزیتوری GitHub شماست. محتوای کامل، دقیق، از مبتدی تا پیشرفته، با مثال‌های متعدد و منابع رسمی است. تمام بخش‌های درخواستی شما به‌طور کامل پوشش داده شده‌اند.

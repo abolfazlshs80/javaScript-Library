@@ -1,0 +1,2197 @@
+### USER
+# پرامپت تولید آموزش جامع Error Handling در JavaScript
+
+## نقش شما
+
+تو یک مدرس باتجربه JavaScript و مهندس نرم‌افزار هستی که باید مبحث **Error Handling در JavaScript** را از سطح کاملاً مقدماتی تا پیشرفته آموزش بدهی.
+
+مخاطب این آموزش، فردی است که ممکن است با مفهوم خطا، Exception، `try...catch`، Promise و `async/await` آشنایی کمی داشته باشد؛ بنابراین باید همه مفاهیم را ابتدا با زبان ساده توضیح بدهی و سپس وارد جزئیات فنی و مثال‌های پیشرفته شوی.
+
+این محتوا قرار است در یک ریپوزیتوری آموزشی GitHub منتشر شود؛ پس باید ساختاریافته، خوانا، دقیق، قابل نگهداری و مناسب مطالعه مرحله‌به‌مرحله باشد.
+
+---
+
+## هدف اصلی آموزش
+
+در پایان این آموزش، خواننده باید بتواند:
+
+* مفهوم Error و Exception را در JavaScript درک کند.
+* تفاوت خطاهای Syntax، Runtime و Logical را توضیح دهد.
+* خطاهای رایج JavaScript را تشخیص دهد.
+* از `try...catch...finally` به‌درستی استفاده کند.
+* با `throw` خطا ایجاد کند.
+* از کلاس‌های داخلی خطا مانند `Error`، `TypeError` و `RangeError` استفاده کند.
+* خطاهای سفارشی ایجاد کند.
+* خطاهای Promise را مدیریت کند.
+* تفاوت خطاهای synchronous و asynchronous را بفهمد.
+* از `async/await` و `try...catch` استفاده کند.
+* خطاهای مربوط به `fetch` و درخواست‌های HTTP را مدیریت کند.
+* خطاها را ثبت، دسته‌بندی و دوباره پرتاب کند.
+* از الگوهای مناسب برای مدیریت خطا در پروژه‌های واقعی استفاده کند.
+* با خطاهای رایج و اشتباهات متداول در Error Handling آشنا شود.
+* تفاوت Error Handling در Browser و Node.js را درک کند.
+
+---
+
+# قوانین مهم تولید محتوا
+
+1. تمام مطالب باید بر اساس منابع معتبر JavaScript نوشته شوند.
+2. از اطلاعات نادرست، قدیمی یا غیر استاندارد استفاده نکن.
+3. در صورت وجود تفاوت میان Browser و Node.js، آن را به‌وضوح توضیح بده.
+4. هر مفهوم را ابتدا ساده و سپس فنی توضیح بده.
+5. برای هر موضوع حداقل یک مثال ساده و در صورت نیاز یک مثال واقعی ارائه کن.
+6. کدها باید با JavaScript مدرن و استاندارد نوشته شوند.
+7. در مثال‌ها از `const` و `let` استفاده کن و تا حد امکان از `var` استفاده نکن.
+8. برای خطاها معمولاً از نمونه‌های `Error` یا زیرکلاس‌های آن استفاده کن؛ از پرتاب رشته و عدد فقط برای توضیح رفتار JavaScript استفاده کن.
+9. تفاوت «ایجاد خطا»، «پرتاب خطا» و «مدیریت خطا» را جداگانه توضیح بده.
+10. در هر مثال، خروجی احتمالی و دلیل آن را توضیح بده.
+11. کدها را بیش از حد پیچیده نکن.
+12. اگر کدی عمداً اشتباه است، آن را با برچسب «مثال اشتباه» مشخص کن.
+13. در پایان هر فصل موارد زیر را اضافه کن:
+
+    * خلاصه فصل
+    * نکات مهم
+    * چند سؤال مفهومی
+    * تمرین عملی
+14. از جدول فقط زمانی استفاده کن که باعث خوانایی بیشتر شود.
+15. از لینک‌های معتبر و مستقیم استفاده کن.
+16. لینک‌ها نباید ساختگی باشند.
+17. تمام اصطلاحات مهم انگلیسی را در کنار معادل یا توضیح فارسی آن‌ها بنویس.
+18. از توضیح بیش از حد پیچیده در فصل‌های ابتدایی خودداری کن.
+19. آموزش باید از ساده به سخت پیش برود.
+20. خروجی نهایی باید با Markdown سازگار باشد.
+
+---
+
+# ساختار کلی فایل اصلی
+
+در ابتدا یک فایل `README.md` کامل تولید کن که شامل موارد زیر باشد:
+
+* عنوان آموزش
+* توضیح کوتاه درباره Error Handling
+* پیش‌نیازهای یادگیری
+* اهداف آموزشی
+* فهرست مطالب با لینک داخلی
+* مسیر پیشنهادی مطالعه
+* لینک فصل‌های مختلف
+* منابع معتبر در پایان
+
+ساختار پیشنهادی ریپوزیتوری:
+
+```text
+JavaScript/
+└── Error-Handling/
+    ├── README.md
+    ├── 01-introduction-to-errors.md
+    ├── 02-types-of-errors.md
+    ├── 03-error-object.md
+    ├── 04-throw-statement.md
+    ├── 05-try-catch.md
+    ├── 06-finally.md
+    ├── 07-built-in-error-types.md
+    ├── 08-custom-errors.md
+    ├── 09-error-propagation.md
+    ├── 10-rethrowing-errors.md
+    ├── 11-promises-error-handling.md
+    ├── 12-async-await-error-handling.md
+    ├── 13-fetch-error-handling.md
+    ├── 14-browser-global-errors.md
+    ├── 15-nodejs-error-handling.md
+    ├── 16-error-handling-patterns.md
+    ├── 17-common-mistakes.md
+    ├── 18-best-practices.md
+    ├── 19-real-world-project.md
+    ├── 20-exercises.md
+    └── 21-references.md
+```
+
+---
+
+# فصل اول: مقدمه‌ای بر Error Handling
+
+در این فصل موارد زیر را توضیح بده:
+
+## 1.1 خطا چیست؟
+
+توضیح بده:
+
+* Error چیست؟
+* چرا خطا در برنامه رخ می‌دهد؟
+* چرا مدیریت خطا اهمیت دارد؟
+* تفاوت خطای برنامه‌نویسی و خطای قابل پیش‌بینی چیست؟
+
+مثال ساده:
+
+```js
+const result = 10 / 0;
+
+console.log(result);
+```
+
+توضیح بده که هر نتیجه غیرمنتظره‌ای الزاماً یک Exception نیست.
+
+## 1.2 Error Handling چیست؟
+
+توضیح بده:
+
+* Error Handling یعنی چه؟
+* مدیریت خطا چه تفاوتی با جلوگیری از خطا دارد؟
+* چرا برنامه نباید با اولین خطا بدون کنترل متوقف شود؟
+* آیا باید تمام خطاها را پنهان کنیم؟ چرا؟
+
+## 1.3 چرخه رخ دادن خطا
+
+مراحل زیر را توضیح بده:
+
+1. رخ دادن خطا
+2. ایجاد یا پرتاب خطا
+3. انتقال خطا در Call Stack
+4. پیدا شدن Handler
+5. مدیریت یا دوباره پرتاب کردن خطا
+
+## 1.4 مثال واقعی
+
+مثال‌هایی مانند:
+
+* وارد کردن عدد نامعتبر
+* پیدا نکردن فایل
+* پاسخ ناموفق API
+* دسترسی به متغیر تعریف‌نشده
+* خطا در تبدیل JSON
+
+در پایان، خلاصه و تمرین ارائه کن.
+
+---
+
+# فصل دوم: انواع خطا در JavaScript
+
+در این فصل تفاوت انواع خطا را با مثال توضیح بده.
+
+## 2.1 Syntax Error
+
+توضیح بده:
+
+* Syntax Error چیست؟
+* چه زمانی رخ می‌دهد؟
+* آیا معمولاً قبل از اجرای برنامه تشخیص داده می‌شود؟
+
+مثال:
+
+```js
+if (true {
+  console.log("Hello");
+}
+```
+
+## 2.2 Runtime Error
+
+توضیح بده:
+
+* Runtime Error چیست؟
+* چه زمانی رخ می‌دهد؟
+* چرا ممکن است برنامه تا زمان اجرای یک مسیر خاص بدون مشکل باشد؟
+
+مثال:
+
+```js
+const user = null;
+
+console.log(user.name);
+```
+
+## 2.3 Logical Error
+
+توضیح بده:
+
+* Logical Error چیست؟
+* چرا ممکن است برنامه اجرا شود اما خروجی اشتباه باشد؟
+* تفاوت Logical Error با Exception چیست؟
+
+مثال:
+
+```js
+function sum(a, b) {
+  return a - b;
+}
+
+console.log(sum(10, 5));
+```
+
+## 2.4 Compile-Time، Parse-Time و Runtime
+
+در حد مناسب برای JavaScript توضیح بده:
+
+* Parse شدن کد
+* اجرای کد
+* خطاهای زمان تجزیه
+* خطاهای زمان اجرا
+
+از ایجاد ادعاهای نادرست درباره کامپایل‌شدن JavaScript خودداری کن.
+
+## 2.5 خطاهای قابل پیش‌بینی و غیرقابل پیش‌بینی
+
+توضیح بده:
+
+* خطای ورودی کاربر
+* خطای شبکه
+* خطای برنامه‌نویسی
+* خطای زیرساخت
+* خطای ناشی از داده نامعتبر
+
+در پایان جدول مقایسه‌ای و تمرین ارائه کن.
+
+---
+
+# فصل سوم: شیء Error در JavaScript
+
+## 3.1 Error چیست؟
+
+توضیح بده که `Error` یک شیء داخلی برای نمایش خطا است.
+
+مثال:
+
+```js
+const error = new Error("Something went wrong");
+
+console.log(error);
+```
+
+## 3.2 ویژگی‌های مهم Error
+
+هرکدام را ساده و دقیق توضیح بده:
+
+* `name`
+* `message`
+* `stack`
+* `cause`
+
+مثال:
+
+```js
+const error = new Error("File not found");
+
+console.log(error.name);
+console.log(error.message);
+console.log(error.stack);
+```
+
+## 3.3 تفاوت Error و String
+
+مثال:
+
+```js
+throw "Something went wrong";
+```
+
+و:
+
+```js
+throw new Error("Something went wrong");
+```
+
+توضیح بده چرا استفاده از `Error` معمولاً بهتر است.
+
+## 3.4 Error به‌عنوان Object
+
+توضیح بده:
+
+* Error یک Object است.
+* می‌توان ویژگی‌های سفارشی به آن اضافه کرد.
+* Error دارای Prototype و زنجیره وراثت است.
+
+مثال:
+
+```js
+const error = new Error("Database error");
+
+error.code = "DB_CONNECTION_FAILED";
+error.statusCode = 500;
+
+console.log(error.code);
+console.log(error.statusCode);
+```
+
+---
+
+# فصل چهارم: دستور throw
+
+## 4.1 throw چیست؟
+
+توضیح بده:
+
+* `throw` برای پرتاب‌کردن خطا یا Exception استفاده می‌شود.
+* بعد از اجرای `throw`، ادامه همان مسیر اجرا نمی‌شود.
+* خطا به دنبال نزدیک‌ترین `catch` می‌گردد.
+
+مثال:
+
+```js
+function divide(a, b) {
+  if (b === 0) {
+    throw new Error("Division by zero is not allowed");
+  }
+
+  return a / b;
+}
+```
+
+## 4.2 پرتاب Error
+
+```js
+throw new Error("Something went wrong");
+```
+
+## 4.3 پرتاب انواع دیگر
+
+مثال‌های زیر را نشان بده:
+
+```js
+throw "Invalid value";
+throw 404;
+throw { message: "Not found" };
+```
+
+سپس توضیح بده چرا در پروژه‌های واقعی بهتر است Error object پرتاب شود.
+
+## 4.4 تفاوت throw و return
+
+مثال:
+
+```js
+function validateAge(age) {
+  if (age < 18) {
+    throw new Error("Age must be at least 18");
+  }
+
+  return true;
+}
+```
+
+توضیح بده:
+
+* `return` نتیجه عادی برمی‌گرداند.
+* `throw` مسیر عادی اجرا را متوقف می‌کند.
+* خطای پرتاب‌شده باید در محل مناسب مدیریت شود.
+
+## 4.5 خطا در Call Stack
+
+مثالی چندلایه بنویس:
+
+```js
+function levelOne() {
+  levelTwo();
+}
+
+function levelTwo() {
+  levelThree();
+}
+
+function levelThree() {
+  throw new Error("Failure in level three");
+}
+```
+
+توضیح بده خطا چگونه در Call Stack حرکت می‌کند.
+
+---
+
+# فصل پنجم: try...catch
+
+## 5.1 ساختار try...catch
+
+ساختار پایه را توضیح بده:
+
+```js
+try {
+  // Code that may throw an error
+} catch (error) {
+  // Handle the error
+}
+```
+
+## 5.2 مثال ساده
+
+```js
+try {
+  const result = JSON.parse("invalid json");
+  console.log(result);
+} catch (error) {
+  console.error("An error occurred:", error.message);
+}
+```
+
+## 5.3 نحوه اجرای try و catch
+
+توضیح بده:
+
+* اگر خطایی رخ ندهد، `catch` اجرا نمی‌شود.
+* اگر خطایی رخ دهد، اجرای `try` متوقف می‌شود.
+* کنترل به `catch` منتقل می‌شود.
+* دستورات بعد از محل خطا در `try` اجرا نمی‌شوند.
+
+## 5.4 متغیر error در catch
+
+توضیح بده:
+
+```js
+try {
+  throw new Error("Test error");
+} catch (error) {
+  console.log(error.name);
+  console.log(error.message);
+}
+```
+
+## 5.5 Optional Catch Binding
+
+توضیح بده که در صورت عدم نیاز به خود خطا می‌توان نام آن را حذف کرد:
+
+```js
+try {
+  riskyOperation();
+} catch {
+  console.log("Operation failed");
+}
+```
+
+## 5.6 محدوده متغیر catch
+
+توضیح بده متغیر `error` فقط داخل بلوک `catch` در دسترس است.
+
+## 5.7 مدیریت خطا در توابع
+
+مثال:
+
+```js
+function getUserName(user) {
+  try {
+    return user.name;
+  } catch (error) {
+    return "Unknown user";
+  }
+}
+```
+
+سپس درباره مزایا و معایب این روش توضیح بده.
+
+---
+
+# فصل ششم: finally
+
+## 6.1 finally چیست؟
+
+توضیح بده:
+
+* `finally` تقریباً همیشه اجرا می‌شود.
+* چه خطا رخ دهد و چه رخ ندهد، `finally` اجرا می‌شود.
+* معمولاً برای Cleanup استفاده می‌شود.
+
+مثال:
+
+```js
+try {
+  console.log("Opening resource");
+} catch (error) {
+  console.error(error);
+} finally {
+  console.log("Closing resource");
+}
+```
+
+## 6.2 کاربردهای finally
+
+مثال‌هایی مانند:
+
+* بستن فایل
+* آزاد کردن Connection
+* مخفی‌کردن Loading
+* فعال‌کردن دوباره دکمه
+* پاک‌کردن وضعیت موقت
+* آزادکردن منابع
+
+## 6.3 رفتار finally هنگام return
+
+مثال:
+
+```js
+function test() {
+  try {
+    return "try";
+  } finally {
+    console.log("finally");
+  }
+}
+
+console.log(test());
+```
+
+## 6.4 خطر return در finally
+
+مثال:
+
+```js
+function test() {
+  try {
+    throw new Error("Something went wrong");
+  } finally {
+    return "Success";
+  }
+}
+```
+
+توضیح بده چرا `return` در `finally` می‌تواند خطا را پنهان کند و چرا معمولاً نباید در `finally` از `return` استفاده کرد.
+
+---
+
+# فصل هفتم: انواع داخلی خطا
+
+هر نوع را با تعریف، مثال و کاربرد توضیح بده.
+
+## 7.1 Error
+
+```js
+throw new Error("General error");
+```
+
+## 7.2 TypeError
+
+وقتی نوع یک مقدار برای عملیات موردنظر مناسب نیست.
+
+```js
+const user = null;
+
+console.log(user.name);
+```
+
+## 7.3 ReferenceError
+
+وقتی به متغیری که وجود ندارد دسترسی پیدا می‌کنیم.
+
+```js
+console.log(username);
+```
+
+## 7.4 SyntaxError
+
+```js
+JSON.parse("{ invalid }");
+```
+
+## 7.5 RangeError
+
+وقتی مقدار خارج از محدوده مجاز باشد.
+
+```js
+const numbers = [];
+numbers.length = -1;
+```
+
+یا:
+
+```js
+const number = 10;
+number.toFixed(200);
+```
+
+## 7.6 URIError
+
+مثال:
+
+```js
+decodeURIComponent("%");
+```
+
+## 7.7 EvalError
+
+توضیح بده که این نوع در JavaScript مدرن کاربرد بسیار محدودی دارد و نباید استفاده از `eval` را توصیه کنی.
+
+## 7.8 AggregateError
+
+توضیح بده:
+
+* برای نمایش چند خطا به‌صورت هم‌زمان استفاده می‌شود.
+* در متدهایی مانند `Promise.any()` ممکن است مشاهده شود.
+
+مثال:
+
+```js
+const error = new AggregateError(
+  [
+    new Error("First failure"),
+    new Error("Second failure")
+  ],
+  "All operations failed"
+);
+
+console.log(error.message);
+console.log(error.errors);
+```
+
+## 7.9 DOMException
+
+توضیح بده:
+
+* در برخی Web APIها استفاده می‌شود.
+* با Error معمولی تفاوت دارد.
+* مثال‌هایی از خطاهای مرورگر ارائه کن.
+
+## 7.10 جدول مقایسه خطاها
+
+جدولی شامل:
+
+* نام خطا
+* مفهوم
+* مثال
+* کاربرد یا علت رایج
+
+---
+
+# فصل هشتم: تشخیص نوع خطا
+
+## 8.1 استفاده از instanceof
+
+مثال:
+
+```js
+try {
+  JSON.parse("invalid");
+} catch (error) {
+  if (error instanceof SyntaxError) {
+    console.log("Invalid JSON syntax");
+  }
+}
+```
+
+## 8.2 بررسی name
+
+```js
+if (error.name === "TypeError") {
+  console.log("A type error occurred");
+}
+```
+
+## 8.3 تفاوت instanceof و name
+
+توضیح بده:
+
+* `instanceof` زنجیره Prototype را بررسی می‌کند.
+* `name` یک property متنی است.
+* چه زمانی هرکدام مناسب‌تر است؟
+* چرا نباید فقط بر اساس متن پیام خطا تصمیم‌گیری کرد؟
+
+## 8.4 چند نوع خطا در یک catch
+
+مثال:
+
+```js
+try {
+  riskyOperation();
+} catch (error) {
+  if (error instanceof TypeError) {
+    console.log("Type problem");
+  } else if (error instanceof RangeError) {
+    console.log("Range problem");
+  } else {
+    throw error;
+  }
+}
+```
+
+توضیح بده چرا خطاهای ناشناخته بهتر است دوباره پرتاب شوند.
+
+---
+
+# فصل نهم: Error Propagation و انتقال خطا
+
+## 9.1 Error Propagation چیست؟
+
+توضیح بده خطا چگونه از یک تابع به تابع فراخواننده منتقل می‌شود.
+
+## 9.2 مثال چندلایه
+
+```js
+function first() {
+  second();
+}
+
+function second() {
+  third();
+}
+
+function third() {
+  throw new Error("Something failed");
+}
+
+try {
+  first();
+} catch (error) {
+  console.error(error.message);
+}
+```
+
+## 9.3 نبودن catch
+
+توضیح بده اگر هیچ `catch` مناسبی وجود نداشته باشد، چه اتفاقی می‌افتد.
+
+## 9.4 مدیریت خطا در لایه مناسب
+
+توضیح بده:
+
+* همه توابع نباید خطا را ببلعند.
+* لایه پایین معمولاً خطا را ایجاد یا غنی می‌کند.
+* لایه بالاتر ممکن است خطا را به کاربر نمایش دهد.
+* خطای فنی نباید مستقیماً به کاربر نمایش داده شود.
+
+## 9.5 خطای قابل مدیریت و خطای غیرقابل مدیریت
+
+مثال‌هایی برای هرکدام ارائه کن.
+
+---
+
+# فصل دهم: Rethrowing Errors
+
+## 10.1 دوباره پرتاب کردن خطا چیست؟
+
+```js
+try {
+  riskyOperation();
+} catch (error) {
+  console.error("Logging error");
+
+  throw error;
+}
+```
+
+## 10.2 چه زمانی باید خطا را دوباره پرتاب کنیم؟
+
+توضیح بده:
+
+* وقتی خطا در این لایه قابل مدیریت نیست.
+* وقتی فقط بخشی از اطلاعات خطا ثبت شده است.
+* وقتی لایه بالاتر مسئول تصمیم‌گیری است.
+* وقتی خطا ناشناخته است.
+
+## 10.3 غنی‌کردن خطا با cause
+
+مثال:
+
+```js
+try {
+  connectToDatabase();
+} catch (error) {
+  throw new Error("Failed to initialize application", {
+    cause: error
+  });
+}
+```
+
+توضیح بده:
+
+* `cause` چیست؟
+* چه زمانی مفید است؟
+* چرا بهتر از حذف خطای اصلی است؟
+
+## 10.4 حفظ خطای اصلی
+
+مثال مناسب بنویس و توضیح بده چرا نباید خطای اصلی را بدون دلیل جایگزین کرد.
+
+---
+
+# فصل یازدهم: خطاهای Promise
+
+## 11.1 Promise چیست؟
+
+فقط به‌اندازه لازم توضیح بده:
+
+* Promise چه مشکلی را حل می‌کند؟
+* سه وضعیت `pending`، `fulfilled` و `rejected`
+* rejected شدن Promise به چه معناست؟
+
+## 11.2 reject کردن Promise
+
+```js
+const promise = new Promise((resolve, reject) => {
+  reject(new Error("Operation failed"));
+});
+```
+
+## 11.3 استفاده از catch
+
+```js
+promise
+  .then((result) => {
+    console.log(result);
+  })
+  .catch((error) => {
+    console.error(error.message);
+  });
+```
+
+## 11.4 خطا در then
+
+```js
+Promise.resolve()
+  .then(() => {
+    throw new Error("Error inside then");
+  })
+  .catch((error) => {
+    console.error(error.message);
+  });
+```
+
+## 11.5 زنجیره Promise
+
+مثال چندمرحله‌ای بنویس و توضیح بده خطا چگونه به `catch` نهایی منتقل می‌شود.
+
+## 11.6 تفاوت throw و reject در Promise
+
+مثال:
+
+```js
+Promise.reject(new Error("Rejected promise"));
+```
+
+و:
+
+```js
+Promise.resolve().then(() => {
+  throw new Error("Thrown inside then");
+});
+```
+
+## 11.7 catch دوباره Promise برمی‌گرداند
+
+توضیح بده:
+
+* `catch()` یک Promise جدید برمی‌گرداند.
+* اگر داخل catch مقدار برگردانیم، زنجیره موفق می‌شود.
+* اگر داخل catch خطا پرتاب کنیم، Promise جدید rejected می‌شود.
+
+مثال:
+
+```js
+Promise.reject(new Error("Initial error"))
+  .catch((error) => {
+    console.log(error.message);
+    return "Fallback value";
+  })
+  .then((value) => {
+    console.log(value);
+  });
+```
+
+## 11.8 finally در Promise
+
+```js
+fetchData()
+  .then((data) => {
+    console.log(data);
+  })
+  .catch((error) => {
+    console.error(error);
+  })
+  .finally(() => {
+    console.log("Loading finished");
+  });
+```
+
+## 11.9 Promise.all و خطا
+
+توضیح بده:
+
+* اگر یکی از Promiseها reject شود چه اتفاقی می‌افتد؟
+* چگونه خطا را مدیریت کنیم؟
+
+## 11.10 Promise.allSettled
+
+توضیح بده:
+
+* چه تفاوتی با `Promise.all` دارد؟
+* چه زمانی برای دریافت نتیجه همه عملیات مناسب است؟
+
+## 11.11 Promise.any و AggregateError
+
+توضیح بده:
+
+* `Promise.any()` چه زمانی reject می‌شود؟
+* مفهوم `AggregateError` در آن چیست؟
+
+## 11.12 Promise.race
+
+توضیح بده خطا یا موفقیت اولین Promise چه اثری دارد.
+
+---
+
+# فصل دوازدهم: Error Handling با async/await
+
+## 12.1 async/await چیست؟
+
+فقط توضیح کوتاهی درباره ارتباط آن با Promise بده.
+
+## 12.2 استفاده از try...catch با await
+
+```js
+async function loadData() {
+  try {
+    const response = await fetch("/api/data");
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    console.error("Failed to load data:", error);
+  }
+}
+```
+
+## 12.3 خطای synchronous داخل async
+
+توضیح بده خطایی که داخل تابع `async` رخ می‌دهد، معمولاً باعث rejected شدن Promise خروجی می‌شود.
+
+## 12.4 تفاوت try...catch با catch زنجیره‌ای
+
+هر دو روش را نشان بده:
+
+```js
+async function loadData() {
+  try {
+    return await fetchData();
+  } catch (error) {
+    console.error(error);
+  }
+}
+```
+
+و:
+
+```js
+fetchData()
+  .then((data) => console.log(data))
+  .catch((error) => console.error(error));
+```
+
+## 12.5 چند await در یک try
+
+توضیح بده:
+
+* محدوده try را چگونه انتخاب کنیم؟
+* آیا تمام عملیات باید در یک try باشند؟
+* چه زمانی tryهای جداگانه مناسب‌ترند؟
+
+## 12.6 خطا در حلقه‌ها
+
+مثال‌هایی با:
+
+* `for...of`
+* `Promise.all`
+* اجرای ترتیبی
+* اجرای موازی
+
+ارائه کن.
+
+## 12.7 مدیریت خطای هر عملیات به‌صورت جداگانه
+
+مثال:
+
+```js
+const results = await Promise.all(
+  urls.map(async (url) => {
+    try {
+      return await fetch(url);
+    } catch (error) {
+      return null;
+    }
+  })
+);
+```
+
+مزایا و معایب این روش را توضیح بده.
+
+---
+
+# فصل سیزدهم: مدیریت خطا در fetch و API
+
+## 13.1 آیا fetch برای HTTP Error خطا پرتاب می‌کند؟
+
+این نکته را حتماً توضیح بده:
+
+* `fetch` معمولاً برای خطاهای شبکه reject می‌شود.
+* پاسخ‌هایی مانند `404` و `500` لزوماً باعث reject شدن Promise نمی‌شوند.
+* باید `response.ok` یا `response.status` بررسی شود.
+
+## 13.2 مثال اشتباه
+
+```js
+const response = await fetch("/api/users");
+
+const data = await response.json();
+```
+
+توضیح بده چرا این کد به‌تنهایی کافی نیست.
+
+## 13.3 مثال صحیح
+
+```js
+async function getUsers() {
+  const response = await fetch("/api/users");
+
+  if (!response.ok) {
+    throw new Error(`Request failed with status ${response.status}`);
+  }
+
+  return response.json();
+}
+```
+
+## 13.4 مدیریت خطای شبکه و HTTP
+
+مثال کامل:
+
+```js
+async function getUsers() {
+  try {
+    const response = await fetch("/api/users");
+
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Could not load users:", error);
+    throw error;
+  }
+}
+```
+
+## 13.5 خطای JSON
+
+توضیح بده اگر پاسخ JSON معتبر نباشد چه اتفاقی رخ می‌دهد.
+
+## 13.6 AbortController
+
+توضیح بده:
+
+* چرا باید درخواست را لغو کنیم؟
+* چگونه Timeout یا Cancel ایجاد کنیم؟
+* تفاوت خطای لغو با خطای واقعی چیست؟
+
+مثال:
+
+```js
+const controller = new AbortController();
+
+fetch("/api/users", {
+  signal: controller.signal
+});
+
+controller.abort();
+```
+
+## 13.7 ساخت خطای API سفارشی
+
+مثال:
+
+```js
+class ApiError extends Error {
+  constructor(message, status, options = {}) {
+    super(message, options);
+
+    this.name = "ApiError";
+    this.status = status;
+  }
+}
+```
+
+---
+
+# فصل چهاردهم: خطاهای سراسری در Browser
+
+## 14.1 window.onerror
+
+توضیح بده:
+
+* برای دریافت برخی خطاهای سراسری استفاده می‌شود.
+* چه اطلاعاتی در اختیار قرار می‌دهد؟
+* محدودیت‌های آن چیست؟
+
+مثال:
+
+```js
+window.onerror = function (message, source, lineno, colno, error) {
+  console.error("Global error:", {
+    message,
+    source,
+    lineno,
+    colno,
+    error
+  });
+};
+```
+
+## 14.2 unhandledrejection
+
+توضیح بده:
+
+* وقتی Promise rejected شود و Handler مناسبی نداشته باشد، چه اتفاقی می‌افتد؟
+* چگونه می‌توان آن را مشاهده کرد؟
+
+مثال:
+
+```js
+window.addEventListener("unhandledrejection", (event) => {
+  console.error("Unhandled rejection:", event.reason);
+});
+```
+
+## 14.3 rejectionhandled
+
+توضیح بده چه زمانی رخ می‌دهد و چه کاربردی دارد.
+
+## 14.4 آیا Global Handler جایگزین try...catch است؟
+
+توضیح بده:
+
+* Global Handler آخرین لایه مشاهده خطا است.
+* نباید جایگزین مدیریت خطای محلی شود.
+* نباید باعث پنهان‌شدن خطاهای برنامه‌نویسی شود.
+
+---
+
+# فصل پانزدهم: مدیریت خطا در Node.js
+
+## 15.1 تفاوت Browser و Node.js
+
+توضیح بده:
+
+* محیط اجرا
+* APIهای متفاوت
+* رویدادهای خطای متفاوت
+* تفاوت در مدیریت Promise rejection
+
+## 15.2 uncaughtException
+
+توضیح بده:
+
+* چیست؟
+* چرا نباید به‌عنوان روش عادی مدیریت خطا استفاده شود؟
+* چرا ممکن است وضعیت برنامه نامطمئن شود؟
+
+## 15.3 unhandledRejection در Node.js
+
+مثال:
+
+```js
+process.on("unhandledRejection", (reason, promise) => {
+  console.error("Unhandled rejection:", reason);
+});
+```
+
+## 15.4 خطا در Callbackها
+
+مثال الگوی Error-First Callback:
+
+```js
+readFile("file.txt", (error, data) => {
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  console.log(data);
+});
+```
+
+## 15.5 خطا در EventEmitter
+
+توضیح بده چرا رویداد `error` در برخی EventEmitterها اهمیت ویژه دارد.
+
+## 15.6 خطا در Streamها
+
+توضیح کوتاهی درباره مدیریت خطا در Stream ارائه کن.
+
+---
+
+# فصل شانزدهم: ساخت Errorهای سفارشی
+
+## 16.1 چرا Error سفارشی بسازیم؟
+
+توضیح بده:
+
+* دسته‌بندی خطاها
+* انتقال اطلاعات بیشتر
+* مدیریت متفاوت خطاها
+* خوانایی بهتر کد
+
+## 16.2 ساخت کلاس سفارشی
+
+```js
+class ValidationError extends Error {
+  constructor(message, field) {
+    super(message);
+
+    this.name = "ValidationError";
+    this.field = field;
+  }
+}
+```
+
+## 16.3 استفاده از Error سفارشی
+
+```js
+function validateUsername(username) {
+  if (!username) {
+    throw new ValidationError(
+      "Username is required",
+      "username"
+    );
+  }
+}
+```
+
+## 16.4 چند کلاس Error
+
+کلاس‌هایی مانند:
+
+* `ValidationError`
+* `NotFoundError`
+* `AuthenticationError`
+* `AuthorizationError`
+* `NetworkError`
+* `ApiError`
+* `DatabaseError`
+
+ایجاد کن و کاربرد هرکدام را توضیح بده.
+
+## 16.5 تنظیم Prototype در محیط‌های مختلف
+
+در صورت نیاز، درباره سازگاری زیرکلاس‌سازی Error و تنظیم `name` توضیح بده؛ اما از پیچیده‌کردن غیرضروری مثال‌ها خودداری کن.
+
+## 16.6 استفاده از cause
+
+مثال کامل برای زنجیره خطاها ارائه کن.
+
+---
+
+# فصل هفدهم: الگوهای رایج Error Handling
+
+## 17.1 Fail Fast
+
+توضیح بده:
+
+* خطا را زود تشخیص بده.
+* از ادامه اجرای عملیات نامعتبر جلوگیری کن.
+
+مثال:
+
+```js
+function createUser(user) {
+  if (!user) {
+    throw new Error("User is required");
+  }
+
+  // Continue operation
+}
+```
+
+## 17.2 Guard Clauses
+
+مثال‌هایی برای بررسی ورودی در ابتدای تابع ارائه کن.
+
+## 17.3 Centralized Error Handling
+
+توضیح بده:
+
+* مدیریت خطا در یک لایه مرکزی
+* مناسب برای APIها و برنامه‌های بزرگ
+* تفاوت مدیریت مرکزی با پنهان‌کردن خطا
+
+## 17.4 Error Boundary به‌صورت مفهومی
+
+بدون ورود به React، مفهوم مرز مدیریت خطا را توضیح بده.
+
+## 17.5 Result Pattern
+
+توضیح بده چگونه می‌توان به‌جای throw کردن، نتیجه‌ای مانند زیر برگرداند:
+
+```js
+{
+  success: true,
+  data: ...
+}
+```
+
+یا:
+
+```js
+{
+  success: false,
+  error: ...
+}
+```
+
+مزایا و معایب Result Pattern را با Exception مقایسه کن.
+
+## 17.6 Retry
+
+توضیح بده:
+
+* چه خطاهایی ارزش تلاش مجدد دارند؟
+* چه خطاهایی نباید Retry شوند؟
+* خطر Retry بی‌نهایت چیست؟
+* مفهوم Exponential Backoff چیست؟
+
+## 17.7 Timeout
+
+مثالی برای محدودکردن زمان عملیات asynchronous ارائه کن.
+
+## 17.8 Fallback
+
+توضیح بده در صورت شکست یک سرویس، چگونه از مقدار جایگزین استفاده کنیم.
+
+## 17.9 Logging
+
+توضیح بده:
+
+* چه اطلاعاتی باید ثبت شود؟
+* چرا نباید رمز عبور، Token و اطلاعات حساس را Log کرد؟
+* تفاوت `console.log` و `console.error`
+* اهمیت ثبت Stack Trace
+
+---
+
+# فصل هجدهم: اشتباهات رایج
+
+هر مورد را با مثال اشتباه و نسخه اصلاح‌شده توضیح بده.
+
+## 18.1 خالی گذاشتن catch
+
+```js
+try {
+  riskyOperation();
+} catch (error) {
+}
+```
+
+## 18.2 پنهان‌کردن خطا
+
+```js
+try {
+  riskyOperation();
+} catch {
+  return null;
+}
+```
+
+## 18.3 استفاده از throw برای رشته
+
+```js
+throw "Something went wrong";
+```
+
+## 18.4 استفاده از return در finally
+
+## 18.5 گرفتن تمام خطاها بدون بررسی
+
+## 18.6 نمایش مستقیم جزئیات خطای داخلی به کاربر
+
+## 18.7 تصور اینکه fetch برای 404 reject می‌شود
+
+## 18.8 فراموش‌کردن await
+
+## 18.9 نداشتن catch برای Promise
+
+## 18.10 استفاده نادرست از Promise.all
+
+## 18.11 ثبت نکردن خطا
+
+## 18.12 ثبت اطلاعات حساس در Log
+
+## 18.13 استفاده بیش از حد از try...catch
+
+## 18.14 دوباره پرتاب نکردن خطاهای ناشناخته
+
+---
+
+# فصل نوزدهم: بهترین روش‌ها
+
+در این فصل یک چک‌لیست حرفه‌ای ارائه کن.
+
+مواردی که باید پوشش داده شوند:
+
+* از `Error` یا زیرکلاس‌های آن استفاده کن.
+* پیام خطا باید واضح و معنادار باشد.
+* خطا را در لایه مناسب مدیریت کن.
+* خطاهای ناشناخته را بی‌دلیل نادیده نگیر.
+* از `finally` برای Cleanup استفاده کن.
+* در Promiseها از `catch` یا `try...catch` استفاده کن.
+* در `fetch` مقدار `response.ok` را بررسی کن.
+* اطلاعات حساس را Log نکن.
+* خطاهای قابل پیش‌بینی را از خطاهای برنامه‌نویسی جدا کن.
+* از Error سفارشی برای دسته‌بندی خطاها استفاده کن.
+* از `cause` برای حفظ علت اصلی خطا استفاده کن.
+* از Retry فقط برای خطاهای موقتی استفاده کن.
+* از Global Handler به‌عنوان آخرین لایه استفاده کن.
+* پیام فنی خطا را مستقیماً به کاربر نمایش نده.
+* برای خطاهای مهم تست بنویس.
+* رفتار خطا را مستند کن.
+
+---
+
+# فصل بیستم: پروژه عملی
+
+یک پروژه کوچک و واقعی طراحی کن که در آن موارد زیر وجود داشته باشد:
+
+## سناریو
+
+یک تابع برای دریافت اطلاعات کاربران از API ایجاد کن که:
+
+* درخواست HTTP ارسال کند.
+* خطاهای شبکه را مدیریت کند.
+* خطاهای HTTP مانند 404 و 500 را تشخیص دهد.
+* خطای JSON را مدیریت کند.
+* خطای سفارشی `ApiError` داشته باشد.
+* از `async/await` استفاده کند.
+* خطا را Log کند.
+* خطا را به لایه بالاتر منتقل کند.
+* در نهایت پیام مناسب به کاربر نمایش دهد.
+* از `AbortController` برای Timeout استفاده کند.
+
+کد پروژه را مرحله‌به‌مرحله بنویس و هر بخش را توضیح بده.
+
+سپس نسخه ساده و نسخه حرفه‌ای پروژه را ارائه کن.
+
+---
+
+# فصل بیست‌ویکم: تمرین‌ها
+
+تمرین‌ها را از ساده به پیشرفته دسته‌بندی کن.
+
+## تمرین‌های مقدماتی
+
+1. خطای یک متغیر تعریف‌نشده را با `try...catch` مدیریت کن.
+2. یک رشته JSON نامعتبر را Parse کن و خطا را مدیریت کن.
+3. تابع تقسیم بنویس که تقسیم بر صفر را ممنوع کند.
+4. یک Error سفارشی ساده بساز.
+
+## تمرین‌های متوسط
+
+1. تابعی بنویس که خطا را دوباره پرتاب کند.
+2. چند نوع خطا را با `instanceof` تشخیص بده.
+3. یک Promise بساز که گاهی موفق و گاهی rejected شود.
+4. با `async/await` خطای چند عملیات را مدیریت کن.
+5. برای `fetch` بررسی `response.ok` اضافه کن.
+
+## تمرین‌های پیشرفته
+
+1. کلاس `ApiError` بساز.
+2. سیستم Retry با Exponential Backoff ایجاد کن.
+3. Timeout برای Promise بنویس.
+4. چند درخواست را با `Promise.allSettled` اجرا کن.
+5. یک سیستم ساده Logging طراحی کن.
+6. یک Error Handler مرکزی برای API ایجاد کن.
+7. خطاها را به دسته‌های Validation، Network و Server تقسیم کن.
+
+برای هر تمرین موارد زیر را بنویس:
+
+* صورت مسئله
+* ورودی و خروجی مورد انتظار
+* راهنمای حل
+* نکته مهم
+* راه‌حل پیشنهادی
+* چالش اضافی
+
+---
+
+# فصل بیست‌ودوم: جمع‌بندی نهایی
+
+در پایان آموزش:
+
+* تمام مفاهیم مهم را خلاصه کن.
+* تفاوت `throw`، `try...catch`، `finally`، `Promise.reject` و `catch()` را در یک جدول بیاور.
+* مسیر یادگیری پیشنهادی را ارائه کن.
+* چند سؤال مصاحبه‌ای مهم درباره Error Handling بنویس.
+* چند نکته حرفه‌ای برای پروژه‌های واقعی ارائه کن.
+
+---
+
+# منابع معتبر
+
+در پایان آموزش، بخشی با عنوان `References` ایجاد کن و منابع معتبر زیر را با عنوان، توضیح کوتاه و لینک مستقیم قرار بده:
+
+1. MDN — Control flow and error handling
+   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Control_flow_and_error_handling
+
+2. MDN — try...catch
+   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch
+
+3. MDN — throw
+   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/throw
+
+4. MDN — Error
+   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
+
+5. MDN — Error types
+   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
+
+6. MDN — Promise
+   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+
+7. MDN — Promise.prototype.catch()
+   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch
+
+8. MDN — Using promises
+   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises
+
+9. MDN — Promise.all()
+   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all
+
+10. MDN — Promise.allSettled()
+    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/allSettled
+
+11. MDN — Promise.any()
+    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/any
+
+12. MDN — Promise.race()
+    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race
+
+13. MDN — async function
+    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function
+
+14. MDN — await
+    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await
+
+15. MDN — Fetch API
+    https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
+
+16. MDN — Response.ok
+    https://developer.mozilla.org/en-US/docs/Web/API/Response/ok
+
+17. MDN — AbortController
+    https://developer.mozilla.org/en-US/docs/Web/API/AbortController
+
+18. MDN — Window: error event
+    https://developer.mozilla.org/en-US/docs/Web/API/Window/error_event
+
+19. MDN — Window: unhandledrejection event
+    https://developer.mozilla.org/en-US/docs/Web/API/Window/unhandledrejection_event
+
+20. MDN — Error: cause
+    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/cause
+
+21. JavaScript.info — Error handling with try...catch
+    https://javascript.info/try-catch
+
+22. JavaScript.info — Custom errors
+    https://javascript.info/custom-errors
+
+23. JavaScript.info — Promises, async/await
+    https://javascript.info/async
+
+24. ECMAScript Language Specification
+    https://tc39.es/ecma262/
+
+25. Node.js Documentation — Errors
+    https://nodejs.org/api/errors.html
+
+26. Node.js Documentation — Process events
+    https://nodejs.org/api/process.html
+
+---
+
+# قالب نهایی هر فصل
+
+برای هر فصل دقیقاً از ساختار زیر استفاده کن:
+
+````md
+# عنوان فصل
+
+## مقدمه
+
+توضیح ساده و قابل فهم درباره موضوع.
+
+## مفهوم اصلی
+
+توضیح دقیق‌تر و فنی.
+
+## مثال ساده
+
+```js
+// Code
+````
+
+## توضیح خط‌به‌خط
+
+توضیح هر خط کد.
+
+## مثال واقعی
+
+```js
+// Real-world example
+```
+
+## اشتباهات رایج
+
+* مورد اول
+* مورد دوم
+
+## نکات مهم
+
+* نکته اول
+* نکته دوم
+
+## تمرین
+
+یک یا چند تمرین مرتبط.
+
+## جمع‌بندی
+
+خلاصه فصل.
+
+```
+
+---
+
+# نکته پایانی
+
+محتوا را یک‌باره به‌صورت سطحی تولید نکن. هر فصل باید کامل، مستقل و قابل مطالعه باشد. از توضیح‌های ساده شروع کن و به‌تدریج وارد مباحث پیشرفته مانند Promise، async/await، Errorهای سفارشی، مدیریت خطای API، Global Error Handling، Retry، Timeout، Logging و معماری مدیریت خطا شو.
+
+هدف این است که خواننده پس از مطالعه این ریپوزیتوری، هم مفهوم Error Handling را بفهمد و هم بتواند آن را در پروژه‌های واقعی JavaScript به‌درستی پیاده‌سازی کند.
+```
+
+
+### ASSISTANT
+در ادامه، فایل `README.md` کامل و ۵ فصل اول این آموزش جامع با رعایت تمام قوانین، ساختار درخواستی و با کیفیت بالا تولید شده است. 
+
+> **نکته:** به دلیل حجم بالای مطالب و رعایت اصل «کامل، دقیق و غیرسطحی بودن» هر فصل، ادامه فصل‌ها (فصل ۶ تا ۲۲) در پاسخ‌های بعدی ارائه خواهد شد. پس از مطالعه این بخش، کافی است عبارت «ادامه بده» را ارسال کنید.
+
+---
+
+# فایل `README.md`
+
+```markdown
+# آموزش جامع Error Handling در JavaScript
+
+به ریپوزیتوری آموزش جامع مدیریت خطا (Error Handling) در جاوااسکریپت خوش آمدید. این آموزش برای توسعه‌دهندگانی طراحی شده است که می‌خواهند از سطح کاملاً مقدماتی تا پیشرفته، مفهوم خطا، نحوه مدیریت آن و بهترین روش‌های (Best Practices) نوشتن کدهای مقاوم در برابر خطا را فرا بگیرند.
+
+## توضیح کوتاه
+مدیریت خطا (Error Handling) فرآیند پیش‌بینی، تشخیص و پاسخ به شرایط استثنایی در حین اجرای برنامه است. بدون مدیریت خطای مناسب، برنامه‌ها در مواجهه با داده‌های نامعتبر، مشکلات شبکه یا اشتباهات برنامه‌نویسی به‌طور ناگهانی متوقف (Crash) می‌شوند. این آموزش به شما می‌آموزد چگونه برنامه‌هایی بنویسید که در برابر خطاها مقاوم (Resilient) باشند و تجربه کاربری روانی ارائه دهند.
+
+## پیش‌نیازهای یادگیری
+- آشنایی مقدماتی با سینتکس جاوااسکریپت (متغیرها، توابع، حلقه‌ها).
+- آشنایی اولیه با مفاهیم شیءگرایی (Object-Oriented) در جاوااسکریپت.
+- آشنایی مقدماتی با مفاهیم ناهمگام (Asynchronous) مانند Callback و Promise (مزیت محسوب می‌شود، اما اجباری نیست).
+
+## اهداف آموزشی
+در پایان این دوره، شما قادر خواهید بود:
+- مفهوم Error و Exception را درک و تفاوت آن‌ها را توضیح دهید.
+- انواع خطاهای Syntax، Runtime و Logical را تشخیص دهید.
+- از ساختارهای `try...catch...finally` و دستور `throw` به‌درستی استفاده کنید.
+- با اشیای داخلی خطا (`Error`, `TypeError`, `RangeError` و...) کار کنید.
+- کلاس‌های خطای سفارشی (Custom Errors) ایجاد نمایید.
+- خطاهای مربوط به Promise، `async/await` و درخواست‌های `fetch` را مدیریت کنید.
+- تفاوت مدیریت خطا در محیط Browser و Node.js را درک کنید.
+- الگوهای طراحی (Design Patterns) حرفه‌ای مانند Retry، Timeout و Centralized Error Handling را پیاده‌سازی کنید.
+
+## فهرست مطالب
+1. [مقدمه‌ای بر Error Handling](./01-introduction-to-errors.md)
+2. [انواع خطا در JavaScript](./02-types-of-errors.md)
+3. [شیء Error در JavaScript](./03-error-object.md)
+4. [دستور throw](./04-throw-statement.md)
+5. [ساختار try...catch](./05-try-catch.md)
+6. [بلوک finally](./06-finally.md)
+7. [انواع داخلی خطا](./07-built-in-error-types.md)
+8. [تشخیص نوع خطا](./08-error-detection.md)
+9. [انتقال خطا (Error Propagation)](./09-error-propagation.md)
+10. [دوباره پرتاب کردن خطا (Rethrowing)](./10-rethrowing-errors.md)
+11. [مدیریت خطای Promise](./11-promises-error-handling.md)
+12. [مدیریت خطا با async/await](./12-async-await-error-handling.md)
+13. [مدیریت خطا در fetch و API](./13-fetch-error-handling.md)
+14. [خطاهای سراسری در Browser](./14-browser-global-errors.md)
+15. [مدیریت خطا در Node.js](./15-nodejs-error-handling.md)
+16. [ساخت Errorهای سفارشی](./16-custom-errors.md)
+17. [الگوهای رایج Error Handling](./17-error-handling-patterns.md)
+18. [اشتباهات رایج](./18-common-mistakes.md)
+19. [بهترین روش‌ها (Best Practices)](./19-best-practices.md)
+20. [پروژه عملی](./20-real-world-project.md)
+21. [تمرین‌ها](./21-exercises.md)
+22. [جمع‌بندی و منابع](./22-references.md)
+
+## مسیر پیشنهادی مطالعه
+1. **مقدماتی:** فصل‌های ۱ تا ۶ را به ترتیب مطالعه کنید تا با مفاهیم پایه و ساختارهای اصلی آشنا شوید.
+2. **متوسط:** فصل‌های ۷ تا ۱۰ را بخوانید تا با انواع خطا و نحوه انتقال و تشخیص آن‌ها آشنا شوید.
+3. **پیشرفته:** فصل‌های ۱۱ تا ۱۵ را برای درک مدیریت خطا در عملیات غیرهمگام (Asynchronous) و محیط‌های مختلف مطالعه کنید.
+4. **حرفه‌ای:** فصل‌های ۱۶ تا ۲۲ را برای یادگیری الگوهای طراحی، جلوگیری از اشتباهات رایج و انجام پروژه عملی بخوانید.
+
+## منابع معتبر
+این آموزش بر اساس مستندات رسمی و منابع معتبر جامعه جاوااسکریپت تدوین شده است. لیست کامل منابع با لینک مستقیم در [فصل ۲۲](./22-references.md) موجود است، از جمله:
+- [MDN Web Docs - JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- [JavaScript.info](https://javascript.info/)
+- [ECMAScript Language Specification](https://tc39.es/ecma262/)
+- [Node.js Documentation - Errors](https://nodejs.org/api/errors.html)
+
+---
+*نکته: به دلیل حجم بالای مطالب و رعایت اصل «کامل و غیرسطحی بودن»، این ریپوزیتوری به‌صورت مرحله‌به‌مرحله تولید می‌شود. فایل‌های فصل ۱ تا ۵ در این پاسخ ارائه شده‌اند و ادامه فصل‌ها در پاسخ بعدی در دسترس خواهد بود.*
+```
+
+---
+
+# فایل `01-introduction-to-errors.md`
+
+```markdown
+# فصل ۱: مقدمه‌ای بر Error Handling
+
+## مقدمه
+هر برنامه‌نویسی، از مبتدی تا حرفه‌ای، با خطا مواجه می‌شود. تفاوت یک برنامه‌نویس حرفه‌ای با یک مبتدی در این نیست که کدام‌یک کد بدون خطا می‌نویسد (چنین چیزی وجود ندارد)، بلکه در این است که چگونه خطاها را پیش‌بینی، مدیریت و از تأثیر مخرب آن‌ها جلوگیری می‌کند. در این فصل، مفاهیم بنیادین خطا و مدیریت آن را بررسی می‌کنیم.
+
+## مفهوم اصلی
+### ۱.۱ خطا (Error) چیست؟
+خطا (Error) یا استثنا (Exception) رویدادی غیرمنتظره است که جریان عادی اجرای برنامه را مختل می‌کند. خطاها به دلایل مختلفی رخ می‌دهند: ورودی نامعتبر کاربر، قطعی شبکه، دسترسی به منابع ناموجود یا اشتباهات منطقی در کد.
+
+**تفاوت خطای برنامه‌نویسی و خطای قابل پیش‌بینی:**
+- **خطای برنامه‌نویسی (Programming Error):** ناشی از باگ در کد است (مثل دسترسی به متغیر تعریف‌نشده). این خطاها باید در مرحله توسعه رفع شوند.
+- **خطای قابل پیش‌بینی (Predictable Error):** ناشی از شرایط محیطی است (مثل پر بودن فضای دیسک یا قطع اینترنت). این خطاها باید در کد مدیریت شوند.
+
+> **نکته مهم:** هر نتیجه غیرمنتظره‌ای لزوماً یک Exception نیست.
+> ```js
+> const result = 10 / 0;
+> console.log(result); // خروجی: Infinity
+> ```
+> در جاوااسکریپت، تقسیم بر صفر باعث پرتاب خطا (Exception) نمی‌شود، بلکه مقدار ویژه `Infinity` را برمی‌گرداند. این یک رفتار تعریف‌شده در استاندارد زبان است، نه یک خطای اجرایی.
+
+### ۱.۲ Error Handling (مدیریت خطا) چیست؟
+مدیریت خطا به معنای نوشتن کدی است که واکنش مناسبی به وقوع خطا نشان دهد. 
+- **تفاوت با جلوگیری از خطا (Prevention):** جلوگیری از خطا یعنی اعتبارسنجی داده‌ها قبل از انجام عملیات (مثل بررسی خالی نبودن یک فرم). مدیریت خطا یعنی واکنش به خطایی که با وجود تمام پیش‌بینی‌ها، رخ داده است.
+- **چرا برنامه نباید بدون کنترل متوقف شود؟** توقف ناگهانی (Crash) باعث از دست رفتن داده‌ها و تجربه کاربری بسیار بد می‌شود. مدیریت خطا به برنامه اجازه می‌دهد به‌جای توقف، به حالت امن بازگردد یا پیام مناسبی نمایش دهد.
+- **آیا باید تمام خطاها را پنهان کنیم؟** خیر. پنهان‌کردن خطاهای برنامه‌نویسی (مثل باگ‌های منطقی) باعث می‌شود اشکالات در تولید (Production) باقی بمانند. خطاهای محیطی باید مدیریت شوند، اما خطاهای برنامه‌نویسی باید گزارش (Log) و رفع شوند.
+
+### ۱.۳ چرخه رخ دادن خطا
+وقتی خطایی رخ می‌دهد، معمولاً این ۵ مرحله را طی می‌کند:
+1. **رخ دادن خطا (Occurrence):** یک عملیات ناموفق انجام می‌شود.
+2. **ایجاد یا پرتاب خطا (Throwing):** موتور جاوااسکریپت یا کد نویسنده، یک شیء خطا ایجاد و پرتاب (`throw`) می‌کند.
+3. **انتقال خطا در Call Stack (Propagation):** اگر خطا در تابع فعلی مدیریت نشود، به تابع فراخواننده (Caller) و سپس به تابع بالاتر منتقل می‌شود.
+4. **پیدا شدن Handler (Capturing):** موتور جاوااسکریپت به دنبال نزدیک‌ترین بلوک `catch` می‌گردد.
+5. **مدیریت یا دوباره پرتاب کردن (Handling/Rethrowing):** خطا یا در `catch` مدیریت می‌شود، یا اگر مدیریت‌شدنی نباشد، دوباره پرتاب می‌شود تا لایه‌های بالاتر آن را مدیریت کنند.
+
+### ۱.۴ مثال‌های واقعی از خطا
+- **وارد کردن عدد نامعتبر:** کاربر در فیلد سن، حروف وارد می‌کند.
+- **پیدا نکردن فایل:** تلاش برای خواندن فایلی که وجود ندارد (`ENOENT` در Node.js).
+- **پاسخ ناموفق API:** سرور پاسخ `500 Internal Server Error` می‌دهد.
+- **دسترسی به متغیر تعریف‌نشده:** تلاش برای خواندن `user.address` وقتی `user` مقدار `null` دارد.
+- **خطا در تبدیل JSON:** تلاش برای `JSON.parse` روی یک رشته که فرمت JSON معتبر ندارد.
+
+## اشتباهات رایج
+- تصور اینکه `try...catch` همه مشکلات (مثل خطاهای Syntax) را حل می‌کند.
+- نادیده گرفتن خطاها و رها کردن بلوک `catch` به‌صورت خالی.
+
+## نکات مهم
+- خطا (Error) با نتیجه غیرمنتظره (مثل `NaN` یا `Infinity`) تفاوت دارد.
+- هدف مدیریت خطا، جلوگیری از توقف ناگهانی برنامه و ارائه بازخورد مناسب است.
+- خطاهای برنامه‌نویسی باید رفع شوند، نه اینکه فقط مدیریت (پنهان) شوند.
+
+## تمرین
+1. یک تابع بنویسید که دو عدد را از ورودی بگیرد و حاصل تقسیم آن‌ها را برگرداند. اگر عدد دوم صفر بود، به‌جای برگرداندن `Infinity`، یک پیام خطای متنی مناسب در کنسول چاپ کند (بدون استفاده از `throw`).
+2. فکر کنید و بنویسید: چرا `JSON.parse("undefined")` باعث خطا می‌شود، اما `JSON.parse("null")` خطایی ایجاد نمی‌کند؟
+
+## جمع‌بندی
+در این فصل یاد گرفتیم که خطا بخشی اجتناب‌ناپذیر از توسعه نرم‌افزار است. درک تفاوت بین خطای برنامه‌نویسی و خطای محیطی، و شناخت چرخه حیات یک خطا، پایه‌ای‌ترین قدم برای نوشتن کدهای مقاوم است. در فصل بعد، انواع مختلف خطا را از نظر فنی بررسی خواهیم کرد.
+```
+
+---
+
+# فایل `02-types-of-errors.md`
+
+```markdown
+# فصل ۲: انواع خطا در JavaScript
+
+## مقدمه
+همه خطاها یکسان نیستند. برخی از آن‌ها قبل از اجرای برنامه قابل تشخیص‌اند، برخی در حین اجرا رخ می‌دهند و برخی دیگر باعث می‌شوند برنامه بدون هیچ خطای آشکاری، خروجی اشتباه تولید کند. درک این تفاوت‌ها برای عیب‌یابی (Debugging) حیاتی است.
+
+## مفهوم اصلی
+### ۲.۱ خطای سینتکس (Syntax Error)
+خطای سینتکس زمانی رخ می‌دهد که کد نوشته‌شده با قوانین گرامری زبان جاوااسکریپت مطابقت نداشته باشد.
+- **چه زمانی رخ می‌دهد؟** در مرحله تجزیه (Parse-Time)، قبل از اینکه کد اصلاً اجرا شود.
+- **تشخیص:** معمولاً توسط ویرایشگر کد (IDE) یا موتور جاوااسکریپت بلافاصله شناسایی می‌شود و اجازه اجرای برنامه را نمی‌دهد.
+
+```js
+// مثال اشتباه
+if (true {
+  console.log("Hello");
+}
+```
+**خروجی:** `SyntaxError: Unexpected token '{'`
+**دلیل:** پرانتز باز `(` بسته نشده است. موتور جاوااسکریپت نمی‌تواند این کد را تجزیه کند، بنابراین اجرا اصلاً شروع نمی‌شود.
+
+### ۲.۲ خطای زمان اجرا (Runtime Error)
+خطای زمان اجرا زمانی رخ می‌دهد که کد از نظر سینتکس صحیح است، اما در حین اجرا با شرایطی مواجه می‌شود که نمی‌تواند پردازش کند.
+- **چه زمانی رخ می‌دهد؟** فقط زمانی که خط اجرای برنامه (Execution Path) به آن خط خاص برسد.
+- **چرا ممکن است برنامه تا آن لحظه بدون مشکل باشد؟** اگر کد حاوی خطا درون یک شرط یا تابع باشد که هرگز فراخوانی نشود، برنامه بدون مشکل اجرا می‌شود.
+
+```js
+const user = null;
+// تا اینجا برنامه سالم است
+console.log(user.name); // خطا اینجاست
+```
+**خروجی:** `TypeError: Cannot read properties of null (reading 'name')`
+**دلیل:** متغیر `user` مقدار `null` دارد و `null` یک شیء نیست که ویژگی `name` داشته باشد.
+
+### ۲.۳ خطای منطقی (Logical Error)
+خطرناک‌ترین نوع خطا، خطای منطقی است. در این حالت، برنامه بدون هیچ پیام خطایی اجرا می‌شود، اما خروجی آن با آنچه انتظار داریم متفاوت است.
+- **تفاوت با Exception:** موتور جاوااسکریپت هیچ خطایی پرتاب نمی‌کند، زیرا کد از نظر فنی "معتبر" است، اما منطق برنامه‌نویس اشتباه است.
+
+```js
+function sum(a, b) {
+  return a - b; // اشتباه منطقی: باید a + b باشد
+}
+
+console.log(sum(10, 5)); // خروجی: 5 (انتظار داشتیم 15 باشد)
+```
+**دلیل:** عملگر ریاضی اشتباه استفاده شده است. موتور جاوااسکریپت این را یک عملیات ریاضی معتبر می‌داند و خطایی پرتاب نمی‌کند.
+
+### ۲.۴ مفاهیم Parse-Time و Runtime در JavaScript
+جاوااسکریپت یک زبان مفسری (Interpreted) و JIT-Compiled است.
+1. **Parse-Time (زمان تجزیه):** موتور جاوااسکریپت کد را می‌خواند و به ساختار درختی (AST) تبدیل می‌کند. خطاهای `SyntaxError` در این مرحله رخ می‌دهند.
+2. **Runtime (زمان اجرا):** کد تجزیه‌شده اجرا می‌شود. خطاهای `TypeError`، `ReferenceError` و غیره در این مرحله رخ می‌دهند.
+
+### ۲.۵ خطاهای قابل پیش‌بینی و غیرقابل پیش‌بینی
+| نوع خطا | منبع خطا | مثال | قابلیت پیش‌بینی |
+| :--- | :--- | :--- | :--- |
+| **ورودی کاربر** | کاربر نهایی | وارد کردن حروف در فیلد عددی | کاملاً قابل پیش‌بینی (باید اعتبارسنجی شود) |
+| **شبکه** | زیرساخت اینترنت | قطع اتصال هنگام `fetch` | قابل پیش‌بینی (باید Retry یا پیام خطا نمایش داده شود) |
+| **برنامه‌نویسی** | توسعه‌دهنده | فراخوانی متد روی `undefined` | غیرقابل پیش‌بینی در تولید (باید با تست جلوگیری شود) |
+| **زیرساخت** | سرور/دیتابیس | پر شدن فضای دیسک سرور | قابل پیش‌بینی (باید مانیتورینگ و مدیریت شود) |
+| **داده نامعتبر** | API خارجی | دریافت ساختار JSON متفاوت از قرارداد | قابل پیش‌بینی (باید با Schema Validation بررسی شود) |
+
+## اشتباهات رایج
+- تلاش برای گرفتن خطای `SyntaxError` با `try...catch` (غیرممکن است، زیرا کد اصلاً اجرا نمی‌شود).
+- فرض اینکه اگر کد اجرا شد و خطایی نداد، پس منطق آن درست است.
+
+## نکات مهم
+- `SyntaxError` مانع اجرای کل اسکریپت می‌شود.
+- `Runtime Error` فقط مسیر اجرای فعلی را متوقف می‌کند (اگر مدیریت نشود، کل برنامه را متوقف می‌کند).
+- `Logical Error` توسط موتور جاوااسکریپت شناسایی نمی‌شود و نیاز به Unit Testing دارد.
+
+## تمرین
+1. سه قطعه کد بنویسید: یکی که `SyntaxError` تولید کند، یکی `Runtime Error` و یکی `Logical Error`.
+2. چرا کد زیر باعث خطای زمان اجرا نمی‌شود، هرچند که تابع `brokenFunction` هرگز تعریف نشده است؟
+   ```js
+   console.log("Start");
+   if (false) {
+       brokenFunction();
+   }
+   console.log("End");
+   ```
+
+## جمع‌بندی
+تشخیص نوع خطا، اولین قدم برای حل آن است. خطاهای سینتکس توسط ابزارهای توسعه شناسایی می‌شوند، خطاهای زمان اجرا باید با `try...catch` مدیریت شوند و خطاهای منطقی نیازمند نوشتن تست و بازبینی کد هستند.
+```
+
+---
+
+# فایل `03-error-object.md`
+
+```markdown
+# فصل ۳: شیء Error در JavaScript
+
+## مقدمه
+در جاوااسکریپت، خطاها فقط پیام‌های متنی ساده نیستند؛ آن‌ها اشیایی (Objects) با ساختار مشخص‌اند که اطلاعات ارزشمندی درباره چرایی و محل وقوع خطا ارائه می‌دهند. درک ساختار شیء `Error` برای عیب‌یابی حرفه‌ای ضروری است.
+
+## مفهوم اصلی
+### ۳.۱ Error چیست؟
+`Error` یک کلاس داخلی (Built-in Constructor) در جاوااسکریپت است که برای ایجاد یک شیء خطا استفاده می‌شود. وقتی خطایی رخ می‌دهد، موتور جاوااسکریپت نمونه‌ای از این کلاس (یا زیرکلاس‌های آن) را ایجاد می‌کند.
+
+```js
+const error = new Error("Something went wrong");
+console.log(error);
+```
+**خروجی:** `Error: Something went wrong` (همراه با Stack Trace در محیط اجرا)
+**دلیل:** ما به‌صورت دستی یک نمونه از کلاس `Error` با پیام مشخص ایجاد کردیم.
+
+### ۳.۲ ویژگی‌های مهم Error
+هر شیء `Error` به‌طور پیش‌فرض دارای ویژگی‌های (Properties) زیر است:
+- **`name`**: نام نوع خطا (مثلاً `"Error"`, `"TypeError"`, `"ReferenceError"`).
+- **`message`**: پیام توصیفی خطا که توسط برنامه‌نویس یا موتور جاوااسکریپت تنظیم می‌شود.
+- **`stack`**: (فقط خواندنی) رشته‌ای که مسیر فراخوانی توابع (Call Stack) را از محل ایجاد خطا تا ریشه نشان می‌دهد. این مهم‌ترین ویژگی برای عیب‌یابی است.
+- **`cause`**: (اضافه‌شده در ES2022) اجازه می‌دهد یک خطای دیگر را به‌عنوان علت ریشه‌ای (Root Cause) این خطا مشخص کنیم.
+
+```js
+const error = new Error("File not found");
+console.log(error.name);    // خروجی: "Error"
+console.log(error.message); // خروجی: "File not found"
+console.log(error.stack);   // خروجی: مسیر کامل فراخوانی توابع
+```
+
+### ۳.۳ تفاوت پرتاب Error و String
+در جاوااسکریپت شما می‌توانید هر مقداری را `throw` کنید، اما این کار توصیه نمی‌شود.
+
+```js
+// مثال اشتباه (پرتاب رشته)
+throw "Something went wrong";
+
+// روش صحیح (پرتاب شیء Error)
+throw new Error("Something went wrong");
+```
+**چرا استفاده از `Error` بهتر است؟**
+وقتی یک رشته پرتاب می‌کنید، ویژگی `stack` (مسیر فراخوانی) را از دست می‌دهید و تشخیص نوع خطا در بلوک `catch` بسیار دشوار می‌شود. شیء `Error` اطلاعات کامل عیب‌یابی را حفظ می‌کند.
+
+### ۳.۴ Error به‌عنوان Object
+از آنجا که `Error` یک شیء است، می‌توانیم ویژگی‌های سفارشی به آن اضافه کنیم تا اطلاعات بیشتری منتقل شود. این کار برای خطاهای سفارشی بسیار مفید است.
+
+```js
+const error = new Error("Database connection failed");
+error.code = "DB_CONNECTION_FAILED";
+error.statusCode = 500;
+
+console.log(error.code);       // خروجی: "DB_CONNECTION_FAILED"
+console.log(error.statusCode); // خروجی: 500
+```
+**دلیل:** جاوااسکریپت اجازه افزودن ویژگی‌های دلخواه به اشیاء را می‌دهد. این کار به لایه‌های بالاتر اجازه می‌دهد تا بر اساس `statusCode` یا `code` تصمیم‌گیری کنند، نه فقط بر اساس متن پیام.
+
+## اشتباهات رایج
+- استفاده از `throw "Error message"` به‌جای `throw new Error("Error message")`.
+- تلاش برای تغییر ویژگی `stack` (این ویژگی معمولاً فقط خواندنی است و دستکاری آن رفتارهای غیرقابل پیش‌بینی دارد).
+
+## نکات مهم
+- همیشه برای پرتاب خطا از `new Error()` یا زیرکلاس‌های آن استفاده کنید.
+- ویژگی `stack` فقط در زمانی که خطا `throw` می‌شود یا شیء `Error` ساخته می‌شود، پر می‌شود.
+- از ویژگی `cause` برای زنجیره‌کردن خطاها و حفظ زمینه (Context) اصلی خطا استفاده کنید.
+
+## تمرین
+1. یک شیء `Error` ایجاد کنید که دارای ویژگی‌های سفارشی `userId` و `action` باشد. سپس در یک بلوک `try...catch` آن را پرتاب کرده و این ویژگی‌ها را در `catch` خوانده و چاپ کنید.
+2. تفاوت خروجی `console.log(new Error("test").stack)` در محیط Node.js و Browser را بررسی کنید.
+
+## جمع‌بندی
+شیء `Error` قلب تپنده مدیریت خطا در جاوااسکریپت است. این شیء نه‌تنها پیام خطا، بلکه مسیر فراخوانی (Stack Trace) و امکان افزودن داده‌های سفارشی را فراهم می‌کند که برای عیب‌یابی در محیط‌های تولید (Production) حیاتی است.
+```
+
+---
+
+# فایل `04-throw-statement.md`
+
+```markdown
+# فصل ۴: دستور throw
+
+## مقدمه
+تا اینجا دیدیم که موتور جاوااسکریپت چگونه خطاها را ایجاد می‌کند. اما به‌عنوان توسعه‌دهنده، ما نیز باید بتوانیم به‌صورت عمدی و در شرایط خاص، خطا ایجاد کنیم. این کار با دستور `throw` انجام می‌شود.
+
+## مفهوم اصلی
+### ۴.۱ throw چیست؟
+دستور `throw` برای پرتاب‌کردن (ایجاد) یک خطا یا Exception استفاده می‌شود. 
+- وقتی `throw` اجرا می‌شود، **اجرای عادی کد در آن مسیر بلافاصله متوقف می‌شود**.
+- موتور جاوااسکریپت شروع به جستجو در Call Stack می‌کند تا نزدیک‌ترین بلوک `catch` را برای مدیریت این خطا پیدا کند.
+
+### ۴.۲ پرتاب Error (روش استاندارد)
+همیشه بهترین روش، پرتاب یک نمونه از کلاس `Error` یا زیرکلاس‌های آن است.
+
+```js
+function divide(a, b) {
+  if (b === 0) {
+    throw new Error("Division by zero is not allowed");
+  }
+  return a / b;
+}
+
+// divide(10, 0); // اگر این خط اجرا شود، برنامه متوقف و خطا پرتاب می‌شود
+```
+**دلیل:** این کار به فراخواننده تابع اطلاع می‌دهد که ورودی نامعتبر است و اجازه نمی‌دهد عملیات ریاضی نامعتبر (که منجر به `Infinity` می‌شود) به‌صورت خام ادامه یابد.
+
+### ۴.۳ پرتاب انواع دیگر (فقط برای درک رفتار زبان)
+جاوااسکریپت به شما اجازه می‌دهد هر مقداری را پرتاب کنید، اما این کار در پروژه‌های واقعی **توصیه نمی‌شود**.
+
+```js
+throw "Invalid value";      // پرتاب رشته
+throw 404;                  // پرتاب عدد
+throw { message: "Not found" }; // پرتاب شیء معمولی
+```
+**چرا در پروژه‌های واقعی بهتر است Error object پرتاب شود؟**
+زیرا اگر یک رشته یا عدد پرتاب کنید، در بلوک `catch` نمی‌توانید از ویژگی‌های استاندارد مثل `error.stack` یا `error.name` استفاده کنید و ابزارهای مانیتورینگ خطا (مثل Sentry) نمی‌توانند آن را به‌درستی ردیابی کنند.
+
+### ۴.۴ تفاوت throw و return
+- `return`: اجرای تابع را با موفقیت به پایان می‌رساند و یک مقدار را به فراخواننده برمی‌گرداند.
+- `throw`: اجرای تابع را به‌صورت **ناموفق** و ناگهانی متوقف می‌کند و کنترل را به مدیریت‌کننده خطا (Error Handler) می‌سپارد.
+
+```js
+function validateAge(age) {
+  if (age < 18) {
+    throw new Error("Age must be at least 18"); // توقف ناگهانی
+  }
+  return true; // بازگشت موفقیت‌آمیز
+}
+```
+
+### ۴.۵ خطا در Call Stack (پشته فراخوانی)
+وقتی خطایی پرتاب می‌شود، اگر در تابع فعلی `catch` نباشد، به تابعی که آن را فراخوانده منتقل می‌شود.
+
+```js
+function levelOne() {
+  levelTwo();
+}
+
+function levelTwo() {
+  levelThree();
+}
+
+function levelThree() {
+  throw new Error("Failure in level three");
+}
+
+try {
+  levelOne();
+} catch (error) {
+  console.error("Caught:", error.message);
+}
+```
+**خروجی:** `Caught: Failure in level three`
+**دلیل:** خطا در `levelThree` پرتاب می‌شود. چون آنجا `catch` نیست، به `levelTwo`، سپس به `levelOne` و در نهایت به بلوک `try...catch` اصلی منتقل می‌شود. اگر `try...catch` در هیچ‌کجا نبود، برنامه کرش می‌کرد.
+
+## اشتباهات رایج
+- استفاده از `throw` برای کنترل جریان عادی برنامه (مانند حلقه‌ها یا شرط‌های معمولی). `throw` فقط برای شرایط **استثنایی** است.
+- پرتاب کردن داده‌هایی که شیء `Error` نیستند.
+
+## نکات مهم
+- بعد از دستور `throw`، هیچ کدی در همان بلوک اجرایی اجرا نمی‌شود.
+- خطای پرتاب‌شده باید در جایی از Call Stack مدیریت شود، در غیر این صورت باعث توقف کامل برنامه می‌شود.
+- پیام خطا باید واضح، توصیفی و به زبان انگلیسی (برای سازگاری با ابزارها) باشد.
+
+## تمرین
+1. تابعی بنویسید به نام `withdraw(balance, amount)`. اگر `amount` بیشتر از `balance` بود، یک `Error` با پیام "Insufficient funds" پرتاب کند. در غیر این صورت، `balance` جدید را `return` کند.
+2. کد زیر را اجرا کنید و توضیح دهید چرا خط `"This will not run"` هرگز چاپ نمی‌شود:
+   ```js
+   try {
+       console.log("Start");
+       throw new Error("Stop!");
+       console.log("This will not run");
+   } catch (e) {
+       console.log("Caught");
+   }
+   ```
+
+## جمع‌بندی
+دستور `throw` ابزار اصلی ما برای اعلام شرایط غیرعادی در کد است. با پرتاب کردن اشیای `Error` استاندارد، ما به سیستم و توسعه‌دهندگان دیگر این امکان را می‌دهیم که خطا را به‌درستی ردیابی و مدیریت کنند.
+```
+
+---
+
+# فایل `05-try-catch.md`
+
+```markdown
+# فصل ۵: ساختار try...catch
+
+## مقدمه
+حالا که یاد گرفتیم چگونه خطا پرتاب می‌شود، باید یاد بگیریم چگونه آن را "بگیریم" و مدیریت کنیم تا برنامه متوقف نشود. ساختار `try...catch` مکانیزم اصلی جاوااسکریپت برای این کار است.
+
+## مفهوم اصلی
+### ۵.۱ ساختار try...catch
+این ساختار از دو بلوک اصلی تشکیل شده است:
+```js
+try {
+  // کدی که احتمال می‌دهیم باعث پرتاب خطا شود
+} catch (error) {
+  // کدی که در صورت وقوع خطا اجرا می‌شود
+}
+```
+
+### ۵.۲ مثال ساده
+```js
+try {
+  const result = JSON.parse("invalid json string");
+  console.log(result);
+} catch (error) {
+  console.error("An error occurred:", error.message);
+}
+```
+**خروجی:** `An error occurred: Unexpected token i in JSON at position 0`
+**دلیل:** تابع `JSON.parse` نمی‌تواند رشته نامعتبر را تجزیه کند و یک `SyntaxError` پرتاب می‌کند. اجرای بلوک `try` بلافاصله متوقف شده و کنترل به بلوک `catch` منتقل می‌شود.
+
+### ۵.۳ نحوه اجرای try و catch
+- اگر در بلوک `try` **هیچ خطایی رخ ندهد**، بلوک `catch` کاملاً نادیده گرفته می‌شود.
+- اگر خطایی رخ دهد، اجرای خطوط بعدی از نقطه خطا در بلوک `try` **متوقف می‌شود** و کنترل فوراً به بلوک `catch` منتقل می‌گردد.
+
+### ۵.۴ متغیر error در catch
+متغیر `error` (که می‌توانید نام آن را هر چیزی بگذارید، مثلاً `err` یا `e`) حاوی شیء خطای پرتاب‌شده است.
+
+```js
+try {
+  throw new Error("Test error");
+} catch (error) {
+  console.log(error.name);    // خروجی: "Error"
+  console.log(error.message); // خروجی: "Test error"
+}
+```
+
+### ۵.۵ Optional Catch Binding (اتصال اختیاری catch)
+در ECMAScript 2019، اگر به خود شیء خطا نیازی نداشته باشید، می‌توانید نام متغیر را حذف کنید. این کار برای زمانی مفید است که فقط می‌خواهید بدانید عملیات شکست خورده است، بدون اینکه به جزئیات خطا اهمیت دهید.
+
+```js
+try {
+  riskyOperation();
+} catch {
+  console.log("Operation failed, using default value.");
+}
+```
+
+### ۵.۶ محدوده متغیر catch (Scope)
+متغیر `error` فقط در داخل بلوک `catch` در دسترس است (Block-scoped). تلاش برای دسترسی به آن در خارج از بلوک باعث `ReferenceError` می‌شود.
+
+```js
+try {
+  throw new Error("Test");
+} catch (error) {
+  console.log(error.message); // معتبر
+}
+// console.log(error); // مثال اشتباه: ReferenceError: error is not defined
+```
+
+### ۵.۷ مدیریت خطا در توابع
+گاهی اوقات مدیریت خطا درون خود تابع منطقی‌تر است تا به فراخواننده تحمیل شود.
+
+```js
+function getUserName(user) {
+  try {
+    return user.name;
+  } catch (error) {
+    return "Unknown user";
+  }
+}
+```
+**مزایا:** تابع همیشه یک مقدار معتبر برمی‌گرداند و فراخواننده نیازی به نوشتن `try...catch` ندارد.
+**معایب:** اگر خطا ناشی از یک باگ برنامه‌نویسی باشد (مثلاً `user` باید همیشه تعریف شده باشد)، این کد آن باگ را پنهان می‌کند و عیب‌یابی را سخت می‌سازد.
+
+## اشتباهات رایج
+- قرار دادن کدهای زیاد و نامرتبط در یک بلوک `try` بزرگ (که تشخیص محل دقیق خطا را سخت می‌کند).
+- استفاده از `try...catch` برای کنترل جریان عادی برنامه (مثل جایگزینی برای `if/else`).
+
+## نکات مهم
+- `try...catch` فقط خطاهای **زمان اجرا (Runtime)** را مدیریت می‌کند و روی خطاهای سینتکس (Syntax Errors) که در مرحله تجزیه رخ می‌دهند، تأثیری ندارد.
+- همیشه سعی کنید بلوک `try` را تا حد امکان کوچک و متمرکز نگه دارید.
+
+## تمرین
+1. تابعی بنویسید که یک آرایه و یک ایندکس دریافت کند. اگر ایندکس خارج از محدوده بود، در بلوک `catch` مقدار `null` برگرداند، در غیر این صورت مقدار آن ایندکس را برگرداند.
+2. چرا کد زیر خطای `ReferenceError` را مدیریت نمی‌کند و برنامه کرش می‌شود؟
+   ```js
+   try {
+       console.log(nonExistentVariable);
+   } catch (e) {
+       console.log("Caught");
+   }
+   // راهنمایی: به زمان تجزیه (Parse-time) در مقابل زمان اجرا فکر کنید. (نکته: در واقع این کد کار می‌کند و ReferenceError یک خطای زمان اجرا است! اما اگر nonExistentVariable در مرحله Parse به عنوان متغیر نامعتبر شناسایی نمی‌شد چه؟ در JS مدرن، ReferenceError توسط try...catch قابل گرفتن است. سؤال را این‌گونه اصلاح کنید: چرا try...catch نمی‌تواند خطای سینتکس را بگیرد؟)
+   ```
+   *تصحیح تمرین ۲:* توضیح دهید چرا `try...catch` نمی‌تواند خطای زیر را بگیرد:
+   ```js
+   try {
+       eval("invalid syntax !!!");
+   } catch (e) {
+       // آیا این اجرا می‌شود؟ بله، چون eval در زمان اجرا تجزیه می‌شود.
+       // اما کد زیر چطور؟
+       // { invalid syntax } // خارج از eval، در خود کد اصلی
+   }
+   ```
+
+## جمع‌بندی
+ساختار `try...catch` ابزار قدرتمندی برای مدیریت خطاهای زمان اجرا است. با استفاده صحیح از آن، می‌توانیم از توقف برنامه جلوگیری کنیم و در صورت بروز مشکل، واکنش مناسبی نشان دهیم. در فصل بعد، با بخش تکمیلی این ساختار، یعنی `finally` آشنا خواهیم شد.
+```
+
+---
+
+> **پایان بخش اول.** 
+> به دلیل محدودیت طول پاسخ در هر پیام و برای حفظ کیفیت بالای محتوا (عدم خلاصه‌سازی سطحی)، فصل‌های ۶ تا ۲۲ در پاسخ بعدی ارائه خواهند شد. 
+> **لطفاً برای دریافت ادامه آموزش (فصل ۶: بلوک finally تا فصل ۲۲: جمع‌بندی و منابع)، پیام «ادامه بده» را ارسال کنید.**
