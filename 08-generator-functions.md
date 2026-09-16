@@ -972,14 +972,12 @@ Generator Function
 هدف این است که خروجی نهایی **مستقیماً قابل قرار دادن در یک GitHub Repository آموزشی** باشد؛ بنابراین Markdown تمیز، Headingهای استاندارد، Code Block، جدول‌های محدود و لینک‌های داخلی صحیح داشته باشد.
 
 
-### ASSISTANT
 این یک راهنمای جامع، ساختاریافته و آماده‌ی قرارگیری در یک **Repository آموزشی گیت‌هاب** است. تمام مفاهیم از مقدماتی تا پیشرفته با رعایت دقیق ساختار درخواستی، به زبان فارسی روان و با استناد به منابع معتبر (MDN, JavaScript.info, ECMAScript) تهیه شده است.
 
 ---
 
 # 📘 راهنمای جامع Generator Function در JavaScript
 
-## فهرست مطالب (Table of Contents)
 1. [Generator Function چیست؟](#1-generator-function-چیست)
 2. [چرا Generator Function به وجود آمد؟](#2-چرا-generator-function-به-وجود-آمد)
 3. [تفاوت Function معمولی و Generator Function](#3-تفاوت-function-معمولی-و-generator-function)

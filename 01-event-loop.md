@@ -83,7 +83,6 @@ JavaScript فقط **یک Call Stack** دارد و کدها را به‌صورت 
 
 ---
 
-## 2. پیش‌نیازهای درک Event Loop
 
 ### 2.1 JavaScript Engine چیست؟
 

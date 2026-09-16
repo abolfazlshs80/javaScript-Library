@@ -1105,7 +1105,6 @@ console.log(true > 1);
 ```text
 Title
 Introduction
-Table of Contents
 
 Basic Concepts
 
@@ -1173,14 +1172,12 @@ References
 هدف نهایی این است که این فایل بتواند به عنوان یک فصل کامل از یک Repository آموزشی JavaScript مورد استفاده قرار بگیرد.
 
 
-### ASSISTANT
 # آموزش جامع عملگرها (Operators) در جاوااسکریپت: از مقدماتی تا پیشرفته
 
 به راهنمای جامع و مرحله‌به‌مرحله **JavaScript Operators** خوش آمدید. این آموزش به گونه‌ای طراحی شده که از مفاهیم پایه شروع شده و شما را به درک عمیقی از رفتارهای پیچیده، Type Coercion، Short-Circuit و اولویت عملگرها می‌رساند. این محتوا برای استفاده در یک Repository آموزشی بهینه‌سازی شده است.
 
 ---
 
-## فهرست مطالب
 1. [Operator چیست؟](#1-operator-چیست)
 2. [Operand چیست؟](#2-operand-چیست)
 3. [انواع Operatorها در JavaScript](#3-انواع-operatorها-در-javascript)

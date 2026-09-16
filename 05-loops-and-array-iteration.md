@@ -1211,7 +1211,6 @@ function* numbers() {
 ```text
 # JavaScript Loops & Array Iteration
 
-## فهرست مطالب
 
 1. Introduction
 2. for Loop
@@ -1250,7 +1249,6 @@ function* numbers() {
 35. References
 ```
 
-برای فهرست مطالب از لینک‌های داخلی Markdown استفاده کن تا کاربر با کلیک روی هر عنوان به همان بخش منتقل شود.
 
 مثلاً:
 
@@ -1276,7 +1274,6 @@ function* numbers() {
 9. اصطلاحات انگلیسی مهم را داخل پرانتز کنار معادل فارسی بیاور.
 10. مطالب را بیش از حد دانشگاهی و پیچیده نکن.
 11. هدف اصلی، آموزش JavaScript برای فرد مبتدی است.
-12. در بخش‌های پیشرفته، ابتدا پیش‌نیازهای لازم را توضیح بده.
 13. اگر رفتار JavaScript در نسخه‌های جدید تغییر کرده، بر اساس منابع رسمی و استاندارد ECMAScript توضیح بده.
 14. ادعاهای مربوط به Performance را بدون منبع یا Benchmark قطعی بیان نکن.
 15. از اطلاعات منسوخ استفاده نکن.
@@ -1293,7 +1290,6 @@ function* numbers() {
 **یک فردی که JavaScript را تازه شروع کرده، بعد از خواندن این README بتواند Loopها، پیمایش Array/Object و Array Methods را بفهمد، کد آن‌ها را بخواند، خودش بنویسد و تفاوت آن‌ها را تشخیص دهد.**
 
 
-### ASSISTANT
 ```markdown
 # JavaScript Loops & Array Iteration 🔄
 
@@ -1303,7 +1299,6 @@ function* numbers() {
 
 ---
 
-## 📚 فهرست مطالب
 
 ### مبانی Loop و Iteration
 - [1. مقدمه‌ای بر Iteration](#1-مقدمه‌ای-بر-iteration)
